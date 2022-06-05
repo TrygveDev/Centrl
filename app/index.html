@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+  <title>Centrl</title>
+
+  <link rel="stylesheet" href="index.css">
+  <script src="https://kit.fontawesome.com/5ada6c251b.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="noselect" id="noselect">
+  <template id="popup-template">
+    <div class="popup" id="popup">
+      <div class="popup-text" id="popup-text"></div>
+      <div class="popup-loader" id="popup-loader"></div>
+    </div>
+  </template>
+
+  <div class="popup-container">
+    <div class="popup-feed" id="popup-feed"></div>
+  </div>
+
+  <div class="container">
+    <div class="header drag">
+      <h1 class="header-title">Centrl by Trygve</h1>
+
+      <div class="header-icons nodrag">
+        <div class="icons-minimize" id="minimize">
+          <i class="fa-solid fa-window-minimize nodrag"></i>
+        </div>
+        <div class="icons-xmark" id="xmark">
+          <i class="fa-solid fa-xmark nodrag"></i>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="clickable navitem navbar-home nodrag" id="home">
+          <i class="fa-solid fa-lg fa-house-user nodrag"></i>
+        </div>
+        <div class="navbar-background">
+          <div class="clickable navitem navbar-item nodrag" id="specs">
+            <i class="fa-solid fa-lg fa-desktop nodrag"></i>
+          </div>
+          <div class="clickable navitem navbar-item nodrag" id="usage">
+            <i class="fa-solid fa-lg fa-microchip nodrag"></i>
+          </div>
+          <div class="clickable navitem navbar-item nodrag" id="empty">
+            <i class="nodrag"></i>
+          </div>
+          <div class="clickable navitem navbar-item nodrag" id="empty">
+            <i class="nodrag"></i>
+          </div>
+          <div class="clickable navitem navbar-item nodrag" id="empty">
+            <i class="nodrag"></i>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="content-content">
+
+        <div class="content-home category" id="home-category">
+
+          <div class="home-home">
+            <div class="home-text">
+              <h2>Welcome to centrl!</h2>
+              <p class="text-p">What is centrl? Well, centrl is a nice little tool to help you keep track of your pc.
+                Live usage information, spec list and more! </p>
+            </div>
+
+            <div class="home-profile">
+              <img class="profile-img" src="pictures/default.png">
+              <h3 class="profile-username">Not logged inn</h3>
+              <button class="profile-btn clickable" id="login-btn">Login with <i
+                  class="fa-brands fa-google"></i></button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="content-specs category" id="specs-category">
+
+          <div class="specs-header">
+            <h2>SPECS</h2>
+          </div>
+          <div class="specs-info">
+            <p>All of your pc hardware specs are nicely listed here. Pretty neat, right?</p>
+          </div>
+
+          <div class="specs-specs">
+            <div class="specs-item">
+              <div class="item-text">
+                <h3>CPU</h3>
+                <p class="selectable" id="specs-cpu"></p>
+              </div>
+              <div class="item-icon">
+                <i class="fa-solid fa-microchip fa-2xl"></i>
+              </div>
+            </div>
+
+            <div class="specs-item">
+              <div class="item-text">
+                <h3>Motherboard</h3>
+                <p class="selectable" id="specs-motherboard"></p>
+              </div>
+              <div class="item-icon">
+                <i class="fa-solid fa-chalkboard fa-2xl"></i>
+              </div>
+            </div>
+
+            <div class="specs-item">
+              <div class="item-text">
+                <h3>RAM</h3>
+                <p class="selectable" id="specs-ram"></p>
+              </div>
+              <div class="item-icon">
+                <i class="fa-solid fa-memory fa-2xl"></i>
+              </div>
+            </div>
+
+            <div class="specs-item">
+              <div class="item-text">
+                <h3>GPU</h3>
+                <p class="selectable" id="specs-gpu"></p>
+              </div>
+              <div class="item-icon">
+                <i class="fa-solid fa-tachograph-digital fa-2xl"></i>
+              </div>
+            </div>
+
+            <div class="specs-item">
+              <div class="item-text" id="specs-storage">
+                <h3>STORAGE</h3>
+              </div>
+              <div class="item-icon">
+                <i class="fa-solid fa-hard-drive fa-2xl"></i>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="content-usage category" id="usage-category">
+          <h2>USAGE</h2>
+          <p id="usage-info">Here you can see all your system usage, in real time!</p>
+
+          <div class="usage-usage">
+
+            <!-- CPU -->
+            <div class="usage-item" id="item-cpu">
+              <i class="fa-solid fa-gauge fa-xl item-usageicon"></i>
+              <h3 class="item-title">CPU</h3>
+              <p class="item-usage" id="usage-cpu">0%</p>
+              <div class="item-usagebar">
+                <div class="useagebar-usage" id="useagebar-cpu"></div>
+              </div>
+            </div>
+            <!-- GPU -->
+            <div class="usage-item" id="item-gpu">
+              <i class="fa-solid fa-gauge fa-xl item-usageicon"></i>
+              <h3 class="item-title">GPU</h3>
+              <p class="item-usage" id="usage-gpu">0%</p>
+              <div class="item-usagebar">
+                <div class="useagebar-usage" id="useagebar-gpu"></div>
+              </div>
+            </div>
+            <!-- RAM -->
+            <div class="usage-item" id="item-ram">
+              <i class="fa-solid fa-gauge fa-xl item-usageicon"></i>
+              <h3 class="item-title">RAM</h3>
+              <p class="item-usage" id="usage-ram">0%</p>
+              <div class="item-usagebar">
+                <div class="useagebar-usage" id="useagebar-ram"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <!-- You can also require other files to run in this process -->
+  <script src="firebase.js" type="module"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>

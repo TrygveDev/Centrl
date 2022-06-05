@@ -1,0 +1,70 @@
+{
+  "name": "centrl",
+  "version": "1.0.0",
+  "description": "Your own little personal information station.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "build-installer": "electron-builder"
+  },
+  "build": {
+    "appId": "centrl",
+    "artifactName": "centrl.${ext}",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "./build/icons/icon.ico",
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "installerIcon": "./build/icons/icon.ico",
+      "uninstallerIcon": "./build/icons/icon.ico",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "keywords": [],
+  "author": "Trygve",
+  "license": "ISC",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "electron-builder": "^23.0.3",
+    "electron": "^18.2.0"
+  },
+  "dependencies": {
+    "node-os-utils": "^1.3.6",
+    "systeminformation": "^5.11.14"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "centrl",
+            "icon": "./build/icons/icon.ico",
+            "appVersion": "1.0"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}
