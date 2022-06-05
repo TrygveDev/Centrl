@@ -1,13 +1,15 @@
 {
   "name": "centrl",
   "version": "1.0.0",
+  "author": "Trygve Melvold <trygvemf@gmail.com> (http://trygve.dev/)",
+  "license": "MIT License",
   "description": "Your own little personal information station.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "build-installer": "electron-builder"
+    "build-installer": "electron-builder",
+    "publish": "electron-builder -w --publish onTagOrDraft"
   },
   "build": {
     "appId": "centrl",
@@ -18,7 +20,11 @@
       ],
       "icon": "./build/icons/icon.ico",
       "requestedExecutionLevel": "requireAdministrator",
-      "publish": ["github"]
+      "publish": [{
+             "provider": "github",
+             "owner": "trygvedev",
+             "repo": "centrl"
+         }]
     },
     "nsis": {
       "installerIcon": "./build/icons/icon.ico",
@@ -28,8 +34,6 @@
     }
   },
   "keywords": [],
-  "author": "Trygve",
-  "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.63",
     "electron": "^18.2.0",
