@@ -12,8 +12,8 @@
     "publish": "electron-builder -w --publish always"
   },
   "build": {
-    "appId": "centrl-v${version}",
-    "artifactName": "centrl.${ext}",
+    "appId": "centrl",
+    "artifactName": "centrl-v${version}.${ext}",
     "win": {
       "target": [
         "nsis"
