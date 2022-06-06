@@ -29,7 +29,7 @@ onAuthStateChanged(auth, (user) => {
         popup("Logged in!", "yellowgreen")
     } else {
         // User is signed out
-        popup("Logged out!", "firebrick")
+        popup("Not logged in!", "gray")
     }
 });
 

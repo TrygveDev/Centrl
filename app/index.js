@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron')
+const { ipcRenderer, app } = require('electron')
 const ipc = ipcRenderer
 const si = require('systeminformation');
 var osu = require('node-os-utils')
@@ -15,6 +15,7 @@ var startPage = 'home'
 document.getElementById(startPage).style.backgroundColor = '#000000'
 document.getElementById(startPage + '-category').style.display = 'block'
 
+// Set window title
 
 // Menu events
 document.getElementById('xmark').addEventListener('click', () => {
