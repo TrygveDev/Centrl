@@ -11,7 +11,7 @@ document.querySelectorAll('.category').forEach(item => {
 
 
 // STARTING PAGE
-var startPage = 'home'
+var startPage = 'usage'
 document.getElementById(startPage).style.backgroundColor = '#000000'
 document.getElementById(startPage + '-category').style.display = 'block'
 
@@ -59,27 +59,32 @@ home.addEventListener('click', () => {
 // Specs
 si.cpu()
     .then(data => {
+        document.getElementById('apiloader-cpu').style.display = "none";
         document.getElementById('specs-cpu').textContent = data.brand
     })
 
 si.baseboard()
     .then(data => {
+        document.getElementById('apiloader-motherboard').style.display = "none";
         document.getElementById('specs-motherboard').textContent = data.model
     })
 
 si.memLayout()
     .then(data => {
+        document.getElementById('apiloader-ram').style.display = "none";
         var size = parseInt(data[0].size / 1000000000)
         document.getElementById('specs-ram').textContent = data.length + "x " + size + "GB " + data[0].type + " " + data[0].clockSpeed + "Mhz"
     })
 
 si.graphics()
     .then(data => {
+        document.getElementById('apiloader-gpu').style.display = "none";
         document.getElementById('specs-gpu').textContent = data.controllers[0].model
     })
 
 si.diskLayout()
     .then(data => {
+        document.getElementById('apiloader-storage').style.display = "none";
         // var disk = [];
         data.forEach(item => {
             var size = item.size / 1000000000000
@@ -104,56 +109,65 @@ document.querySelectorAll('.selectable').forEach(item => {
 
 
 // Usage
-function loop() {
-    setTimeout(function () {
+setInterval(() => {
+    cpu.usage()
+        .then(data => {
+            document.getElementById('apiloader-usecpu').style.display = "none";
+            var cpuUsage = data.toFixed(0)
+            document.getElementById('usage-cpu').textContent = cpuUsage + '%'
+            document.getElementById('useagebar-cpu').style.width = cpuUsage + '%'
+            if (cpuUsage <= 60) {
+                document.getElementById('useagebar-cpu').style.backgroundColor = 'yellowgreen'
+            } else if (cpuUsage > 60 && cpuUsage <= 80) {
+                document.getElementById('useagebar-cpu').style.backgroundColor = 'yellow'
+            } else if (cpuUsage > 80) {
+                document.getElementById('useagebar-cpu').style.backgroundColor = 'red'
+            }
+        })
 
-        // Usage
-        cpu.usage()
-            .then(data => {
-                var cpuUsage = data.toFixed(0)
-                document.getElementById('usage-cpu').textContent = cpuUsage + '%'
-                document.getElementById('useagebar-cpu').style.width = cpuUsage + '%'
-                if (cpuUsage <= 60) {
-                    document.getElementById('useagebar-cpu').style.backgroundColor = 'yellowgreen'
-                } else if (cpuUsage > 60 && cpuUsage <= 80) {
-                    document.getElementById('useagebar-cpu').style.backgroundColor = 'yellow'
-                } else if (cpuUsage > 80) {
-                    document.getElementById('useagebar-cpu').style.backgroundColor = 'red'
-                }
-            })
+    si.graphics()
+        .then(data => {
+            document.getElementById('apiloader-usegpu').style.display = "none";
+            var gpuUsage = data.controllers[0].memoryUsed / data.controllers[0].memoryTotal * 100
+            document.getElementById('usage-gpu').textContent = gpuUsage.toFixed(0) + '%'
+            document.getElementById('useagebar-gpu').style.width = gpuUsage.toFixed(0) + '%'
+            if (gpuUsage.toFixed(0) <= 60) {
+                document.getElementById('useagebar-gpu').style.backgroundColor = 'yellowgreen'
+            } else if (gpuUsage.toFixed(0) > 60 && gpuUsage.toFixed(0) <= 80) {
+                document.getElementById('useagebar-gpu').style.backgroundColor = 'yellow'
+            } else if (gpuUsage.toFixed(0) > 80) {
+                document.getElementById('useagebar-gpu').style.backgroundColor = 'red'
+            }
+        })
 
-        si.graphics()
-            .then(data => {
-                var gpuUsage = data.controllers[0].memoryUsed / data.controllers[0].memoryTotal * 100
-                document.getElementById('usage-gpu').textContent = gpuUsage.toFixed(0) + '%'
-                document.getElementById('useagebar-gpu').style.width = gpuUsage.toFixed(0) + '%'
-                if (gpuUsage.toFixed(0) <= 60) {
-                    document.getElementById('useagebar-gpu').style.backgroundColor = 'yellowgreen'
-                } else if (gpuUsage.toFixed(0) > 60 && gpuUsage.toFixed(0) <= 80) {
-                    document.getElementById('useagebar-gpu').style.backgroundColor = 'yellow'
-                } else if (gpuUsage.toFixed(0) > 80) {
-                    document.getElementById('useagebar-gpu').style.backgroundColor = 'red'
-                }
-            })
+    si.mem()
+        .then(data => {
+            document.getElementById('apiloader-useram').style.display = "none";
+            var usedram = data.used / 1000000000
+            var usedtotal = data.total / 1000000000
+            var ramUsage = usedram / usedtotal * 100
 
-        si.mem()
-            .then(data => {
-                var usedram = data.used / 1000000000
-                var usedtotal = data.total / 1000000000
-                var ramUsage = usedram / usedtotal * 100
+            document.getElementById('usage-ram').textContent = ramUsage.toFixed(0) + '%'
+            document.getElementById('useagebar-ram').style.width = ramUsage.toFixed(0) + '%'
+            if (ramUsage.toFixed(0) <= 60) {
+                document.getElementById('useagebar-ram').style.backgroundColor = 'yellowgreen'
+            } else if (ramUsage.toFixed(0) > 60 && ramUsage.toFixed(0) <= 80) {
+                document.getElementById('useagebar-ram').style.backgroundColor = 'yellow'
+            } else if (ramUsage.toFixed(0) > 80) {
+                document.getElementById('useagebar-ram').style.backgroundColor = 'red'
+            }
+        })
 
-                document.getElementById('usage-ram').textContent = ramUsage.toFixed(0) + '%'
-                document.getElementById('useagebar-ram').style.width = ramUsage.toFixed(0) + '%'
-                if (ramUsage.toFixed(0) <= 60) {
-                    document.getElementById('useagebar-ram').style.backgroundColor = 'yellowgreen'
-                } else if (ramUsage.toFixed(0) > 60 && ramUsage.toFixed(0) <= 80) {
-                    document.getElementById('useagebar-ram').style.backgroundColor = 'yellow'
-                } else if (ramUsage.toFixed(0) > 80) {
-                    document.getElementById('useagebar-ram').style.backgroundColor = 'red'
-                }
-            })
+    document.getElementById('apiloader-usediskup').style.display = "none";
+    document.getElementById('apiloader-usediskdown').style.display = "none";
 
-        loop();
-    }, 1500)
-}
-loop();
+    si.networkStats()
+        .then(data => {
+            // document.getElementById('apiloader-usenetup').style.display = "none";
+            // document.getElementById('apiloader-usenetdown').style.display = "none";
+            console.log(Math.round(data[0].rx_sec / 1024) + "kb DOWN")
+            console.log(Math.round(data[0].tx_sec / 1024) + "kb UP")
+            console.log(" ")
+        })
+
+}, 1000)

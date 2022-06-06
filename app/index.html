@@ -24,7 +24,11 @@
     <div class="popup-feed" id="popup-feed"></div>
   </div>
 
-  <div class="container">
+
+  <div class="loader" id="loader">
+    <div class="dot-pulse" id="dot-pulse"></div>
+  </div>
+  <div class="container" id="container">
     <div class="header drag">
       <h1 class="header-title">Centrl by Trygve</p>
       </h1>
@@ -98,7 +102,9 @@
             <div class="specs-item">
               <div class="item-text">
                 <h3>CPU</h3>
-                <p class="selectable" id="specs-cpu"></p>
+                <p class="selectable" id="specs-cpu">
+                <div class="apiloader" id="apiloader-cpu"><span></span></div>
+                </p>
               </div>
               <div class="item-icon">
                 <i class="fa-solid fa-microchip fa-2xl"></i>
@@ -108,7 +114,9 @@
             <div class="specs-item">
               <div class="item-text">
                 <h3>Motherboard</h3>
-                <p class="selectable" id="specs-motherboard"></p>
+                <p class="selectable" id="specs-motherboard">
+                <div class="apiloader" id="apiloader-motherboard"><span></span></div>
+                </p>
               </div>
               <div class="item-icon">
                 <i class="fa-solid fa-chalkboard fa-2xl"></i>
@@ -118,7 +126,9 @@
             <div class="specs-item">
               <div class="item-text">
                 <h3>RAM</h3>
-                <p class="selectable" id="specs-ram"></p>
+                <p class="selectable" id="specs-ram">
+                <div class="apiloader" id="apiloader-ram"><span></span></div>
+                </p>
               </div>
               <div class="item-icon">
                 <i class="fa-solid fa-memory fa-2xl"></i>
@@ -128,7 +138,9 @@
             <div class="specs-item">
               <div class="item-text">
                 <h3>GPU</h3>
-                <p class="selectable" id="specs-gpu"></p>
+                <p class="selectable" id="specs-gpu">
+                <div class="apiloader" id="apiloader-gpu"><span></span></div>
+                </p>
               </div>
               <div class="item-icon">
                 <i class="fa-solid fa-tachograph-digital fa-2xl"></i>
@@ -138,6 +150,7 @@
             <div class="specs-item">
               <div class="item-text" id="specs-storage">
                 <h3>STORAGE</h3>
+                <div class="apiloader" id="apiloader-storage"><span></span></div>
               </div>
               <div class="item-icon">
                 <i class="fa-solid fa-hard-drive fa-2xl"></i>
@@ -158,7 +171,9 @@
             <div class="usage-item" id="item-cpu">
               <i class="fa-solid fa-gauge fa-xl item-usageicon"></i>
               <h3 class="item-title">CPU</h3>
-              <p class="item-usage" id="usage-cpu">0%</p>
+              <p class="item-usage" id="usage-cpu">
+              <div class="apiloader" id="apiloader-usecpu"><span></span></div>
+              </p>
               <div class="item-usagebar">
                 <div class="useagebar-usage" id="useagebar-cpu"></div>
               </div>
@@ -167,7 +182,9 @@
             <div class="usage-item" id="item-gpu">
               <i class="fa-solid fa-gauge fa-xl item-usageicon"></i>
               <h3 class="item-title">GPU</h3>
-              <p class="item-usage" id="usage-gpu">0%</p>
+              <p class="item-usage" id="usage-gpu">
+              <div class="apiloader" id="apiloader-usegpu"><span></span></div>
+              </p>
               <div class="item-usagebar">
                 <div class="useagebar-usage" id="useagebar-gpu"></div>
               </div>
@@ -176,9 +193,53 @@
             <div class="usage-item" id="item-ram">
               <i class="fa-solid fa-gauge fa-xl item-usageicon"></i>
               <h3 class="item-title">RAM</h3>
-              <p class="item-usage" id="usage-ram">0%</p>
+              <p class="item-usage" id="usage-ram">
+              <div class="apiloader" id="apiloader-useram"><span></span></div>
+              </p>
               <div class="item-usagebar">
                 <div class="useagebar-usage" id="useagebar-ram"></div>
+              </div>
+            </div>
+            <!-- DISK -->
+            <div class="usage-item" id="item-disk">
+              <i class="fa-solid fa-gauge fa-xl item-usageicon"></i>
+              <h3 class="item-title">DISK</h3>
+              <div class="item-usagedata">
+                <div class="usagedata-up" id="usagedata-up">
+                  <i class="fa-solid fa-arrow-up fa-xl usageicon-disk"></i>
+                  <p class="item-usage usagedata-text" id="usage-diskup">4000.5
+                  <div class="apiloader" id="apiloader-usediskup"><span></span></div>
+                  </p>
+                  <p class="usagedata-mbps">Read Mbps</p>
+                </div>
+                <div class="usagedata-down" id="usagedata-down">
+                  <i class="fa-solid fa-arrow-down fa-xl usageicon-disk"></i>
+                  <p class="item-usage usagedata-text" id="usage-diskdown">4000.5
+                  <div class="apiloader" id="apiloader-usediskdown"><span></span></div>
+                  </p>
+                  <p class="usagedata-mbps">Write Mbps</p>
+                </div>
+              </div>
+            </div>
+            <!-- NETWORK -->
+            <div class="usage-item" id="item-disk">
+              <i class="fa-solid fa-gauge fa-xl item-usageicon"></i>
+              <h3 class="item-title">NETWORK</h3>
+              <div class="item-usagedata">
+                <div class="usagedata-up" id="usagedata-up">
+                  <i class="fa-solid fa-arrow-up fa-xl usageicon-disk"></i>
+                  <p class="item-usage usagedata-text" id="usage-diskup">4000.5
+                  <div class="apiloader" id="apiloader-usediskup"><span></span></div>
+                  </p>
+                  <p class="usagedata-mbps">Upload Kbs</p>
+                </div>
+                <div class="usagedata-down" id="usagedata-down">
+                  <i class="fa-solid fa-arrow-down fa-xl usageicon-disk"></i>
+                  <p class="item-usage usagedata-text" id="usage-diskdown">4000.5
+                  <div class="apiloader" id="apiloader-usediskdown"><span></span></div>
+                  </p>
+                  <p class="usagedata-mbps">Download Kbs</p>
+                </div>
               </div>
             </div>
 

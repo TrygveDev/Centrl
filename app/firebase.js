@@ -1,3 +1,5 @@
+document.getElementById('loader').style.display = 'flex';
+document.getElementById('container').style.display = 'none';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
@@ -21,17 +23,32 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
+var uid;
+var init = false;
 onAuthStateChanged(auth, (user) => {
     if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
+        uid = user.uid;
+        init = true;
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('container').style.display = 'block';
         popup("Logged in!", "yellowgreen")
     } else {
         // User is signed out
+        init = true;
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('container').style.display = 'block';
         popup("Not logged in!", "gray")
     }
 });
+
+while (init == false) {
+    if (init == true) {
+        break;
+    }
+    await new Promise(r => setTimeout(r, 100));
+}
 
 document.getElementById('login-btn').addEventListener('click', () => {
     popup("Feature not implemented!", "orange")
@@ -53,7 +70,6 @@ function popup(t, c) {
         setTimeout(() => {
             document.getElementById('popup-feed').removeChild(document.getElementById('popup'))
         }, 250)
-
     }, 9750)
 }
 
