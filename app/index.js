@@ -163,11 +163,10 @@ setInterval(() => {
 
     si.networkStats()
         .then(data => {
-            // document.getElementById('apiloader-usenetup').style.display = "none";
-            // document.getElementById('apiloader-usenetdown').style.display = "none";
-            console.log(Math.round(data[0].rx_sec / 1024) + "kb DOWN")
-            console.log(Math.round(data[0].tx_sec / 1024) + "kb UP")
-            console.log(" ")
+            document.getElementById('apiloader-usenetup').style.display = "none";
+            document.getElementById('apiloader-usenetdown').style.display = "none";
+            document.getElementById('usage-netdown').textContent = Math.round(data[0].rx_sec / 1024)
+            document.getElementById('usage-netup').textContent = Math.round(data[0].tx_sec / 1024)
         })
 
 }, 1000)
