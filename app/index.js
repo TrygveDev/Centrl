@@ -1,4 +1,5 @@
 const { ipcRenderer, app } = require('electron')
+const shell = require('electron').shell;
 const ipc = ipcRenderer
 const si = require('systeminformation');
 var osu = require('node-os-utils')
@@ -11,9 +12,9 @@ document.querySelectorAll('.category').forEach(item => {
 
 
 // STARTING PAGE
-var startPage = 'usage'
+var startPage = 'specs'
 document.getElementById(startPage).style.backgroundColor = '#000000'
-document.getElementById(startPage + '-category').style.display = 'block'
+document.getElementById(startPage + '-category').style.display = 'flex'
 
 // Menu events
 document.getElementById('xmark').addEventListener('click', () => {
@@ -67,7 +68,7 @@ document.querySelectorAll('.navitem').forEach(button => {
     })
 })
 specs.addEventListener('click', () => {
-    document.getElementById('specs-category').style.display = 'block'
+    document.getElementById('specs-category').style.display = 'flex'
 })
 usage.addEventListener('click', () => {
     document.getElementById('usage-category').style.display = 'block'
@@ -89,31 +90,109 @@ processes.addEventListener('click', () => {
 })
 
 
+// Home
+document.getElementById('reportbug').addEventListener('click', (e) => {
+    e.preventDefault();
+    shell.openExternal("https://github.com/TrygveDev/Centrl/issues");
+})
+document.getElementById('requestfeature').addEventListener('click', () => {
+    e.preventDefault();
+    shell.openExternal("https://github.com/TrygveDev/Centrl/issues");
+})
+
 
 // Specs
+
+const detailsDiv = document.getElementById('detailsDiv')
+const cpuDiv = document.getElementById('cpuDiv')
+const motherboardDiv = document.getElementById('motherboardDiv')
+const ramDiv = document.getElementById('ramDiv')
+const gpuDiv = document.getElementById('gpuDiv')
+
+cpuDiv.style.backgroundColor = 'black'
+
+document.querySelectorAll('.specs-item').forEach(item => {
+    item.addEventListener('click', () => {
+        document.querySelectorAll('.specs-item').forEach(item => {
+            item.style.backgroundColor = '#121516'
+        })
+        item.style.backgroundColor = 'black'
+        document.querySelectorAll('.item-details-container').forEach(item => {
+            item.style.display = 'none'
+        })
+    })
+})
+cpuDiv.addEventListener('click', () => {
+    document.getElementById('details-cpu').style.display = 'block';
+})
+motherboardDiv.addEventListener('click', () => {
+    document.getElementById('details-motherboard').style.display = 'block';
+})
+ramDiv.addEventListener('click', () => {
+    document.getElementById('details-ram').style.display = 'block';
+})
+gpuDiv.addEventListener('click', () => {
+    document.getElementById('details-gpu').style.display = 'block';
+})
+
 si.cpu()
     .then(data => {
         document.getElementById('apiloader-cpu').style.display = "none";
+        document.getElementById('apiloader-details').style.display = "none";
         document.getElementById('specs-cpu').textContent = data.brand
+
+        document.getElementById('details-cpu').style.display = "block";
+        document.getElementById('cpu-model').textContent = data.brand
+        document.getElementById('cpu-manufacturer').textContent = data.manufacturer
+        document.getElementById('cpu-socket').textContent = data.socket
+        document.getElementById('cpu-speed').textContent = data.speed + " GHz"
+        document.getElementById('cpu-cores').textContent = data.cores
+        document.getElementById('cpu-physicalcores').textContent = data.physicalCores
+        document.getElementById('cpu-modelnumber').textContent = data.model
+        document.getElementById('cpu-family').textContent = data.family
     })
 
 si.baseboard()
     .then(data => {
         document.getElementById('apiloader-motherboard').style.display = "none";
         document.getElementById('specs-motherboard').textContent = data.model
+
+        document.getElementById('motherboard-model').textContent = data.model
+        document.getElementById('motherboard-manufacturer').textContent = data.manufacturer
+        document.getElementById('motherboard-memoryslots').textContent = data.memSlots
+        document.getElementById('motherboard-serial').textContent = data.serial
+        document.getElementById('motherboard-version').textContent = data.version
     })
 
 si.memLayout()
     .then(data => {
         document.getElementById('apiloader-ram').style.display = "none";
-        var size = parseInt(data[0].size / 1000000000)
+        var size = (data[0].size / 1024 / 1024 / 1024).toFixed(0)
         document.getElementById('specs-ram').textContent = data.length + "x " + size + "GB " + data[0].type + " " + data[0].clockSpeed + "Mhz"
+
+        const ram = data[0]
+        document.getElementById('ram-speed').textContent = ram.clockSpeed + "GHz"
+        document.getElementById('ram-size').textContent = (size * data.length) + "GB"
+        document.getElementById('ram-sizeper').textContent = size + "GB";
+        document.getElementById('ram-type').textContent = ram.formFactor + " " + ram.type
+        document.getElementById('ram-manufacturer').textContent = ram.manufacturer
+        document.getElementById('ram-partnumber').textContent = ram.partNum
+        document.getElementById('ram-serialnumber').textContent = ram.serialNum
     })
 
 si.graphics()
     .then(data => {
         document.getElementById('apiloader-gpu').style.display = "none";
         document.getElementById('specs-gpu').textContent = data.controllers[0].model
+
+        var data = data.controllers[0]
+        document.getElementById('gpu-model').textContent = data.model
+        document.getElementById('gpu-vendor').textContent = data.vendor
+        document.getElementById('gpu-clockcore').textContent = data.clockCore + " MHz"
+        document.getElementById('gpu-clockmemory').textContent = data.clockMemory + " MHz"
+        document.getElementById('gpu-vram').textContent = data.vram + " MB"
+        document.getElementById('gpu-bus').textContent = data.bus
+        document.getElementById('gpu-driver').textContent = data.driverVersion
     })
 
 si.diskLayout()
@@ -143,7 +222,6 @@ document.querySelectorAll('.selectable').forEach(item => {
         popup("Copied to clipboard", "gray")
     })
 })
-
 
 
 // Usage

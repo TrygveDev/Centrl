@@ -76,84 +76,201 @@
 
           <div class="home-home">
             <div class="home-text">
-              <h2>Welcome to centrl!</h2>
+              <img src="pictures/icon.ico" width="100px">
+              <h1>Welcome to centrl!</h1>
               <p class="text-p">Centrl is a nice little tool to help you keep track of your pc.
                 List of pc hardware, live system usage and more! </p>
               <p class="text-byline">In beta development by TrygveDev
               </p>
+              <div class="home-text-href">
+                <a id="reportbug">Report
+                  Bug</a>
+                <p>·</p>
+                <a id="requestfeature">Request Feature</a>
+              </div>
+
             </div>
           </div>
 
         </div>
 
         <div class="content-specs category" id="specs-category">
-
-          <div class="specs-header">
-            <h2>SPECS</h2>
-          </div>
-          <div class="specs-info">
-            <p class="tab-info">All of your pc hardware specs are nicely listed here. Pretty neat, right?</p>
-          </div>
-
-          <div class="specs-specs">
-            <div class="specs-item">
-              <div class="item-text">
-                <h3>CPU</h3>
-                <p class="selectable" id="specs-cpu">
-                <div class="apiloader" id="apiloader-cpu"><span></span></div>
-                </p>
-              </div>
-              <div class="item-icon">
-                <i class="fa-solid fa-microchip fa-2xl"></i>
-              </div>
+          <div class="specs-header-container">
+            <div class="specs-header">
+              <h2>SPECS</h2>
             </div>
-
-            <div class="specs-item">
-              <div class="item-text">
-                <h3>Motherboard</h3>
-                <p class="selectable" id="specs-motherboard">
-                <div class="apiloader" id="apiloader-motherboard"><span></span></div>
-                </p>
-              </div>
-              <div class="item-icon">
-                <i class="fa-solid fa-chalkboard fa-2xl"></i>
-              </div>
-            </div>
-
-            <div class="specs-item">
-              <div class="item-text">
-                <h3>RAM</h3>
-                <p class="selectable" id="specs-ram">
-                <div class="apiloader" id="apiloader-ram"><span></span></div>
-                </p>
-              </div>
-              <div class="item-icon">
-                <i class="fa-solid fa-memory fa-2xl"></i>
-              </div>
-            </div>
-
-            <div class="specs-item">
-              <div class="item-text">
-                <h3>GPU</h3>
-                <p class="selectable" id="specs-gpu">
-                <div class="apiloader" id="apiloader-gpu"><span></span></div>
-                </p>
-              </div>
-              <div class="item-icon">
-                <i class="fa-solid fa-tachograph-digital fa-2xl"></i>
-              </div>
-            </div>
-
-            <div class="specs-item">
-              <div class="item-text" id="specs-storage">
-                <h3>STORAGE</h3>
-                <div class="apiloader" id="apiloader-storage"><span></span></div>
-              </div>
-              <div class="item-icon">
-                <i class="fa-solid fa-hard-drive fa-2xl"></i>
-              </div>
+            <div class="specs-info">
+              <p class="tab-info">All of your pc hardware specs are nicely listed here. Pretty neat, right?</p>
             </div>
           </div>
+
+          <div class="specs-content">
+            <!-- Specs list -->
+            <div class="specs-list">
+              <div class="specs-specs">
+                <div class="specs-item" id="cpuDiv">
+                  <div class="item-text">
+                    <h3>CPU</h3>
+                    <p id="specs-cpu">
+                    <div class="apiloader" id="apiloader-cpu"><span></span></div>
+                    </p>
+                  </div>
+                  <div class="item-icon">
+                    <i class="fa-solid fa-microchip fa-2xl"></i>
+                  </div>
+                </div>
+
+                <div class="specs-item" id="motherboardDiv">
+                  <div class="item-text">
+                    <h3>Motherboard</h3>
+                    <p id="specs-motherboard">
+                    <div class="apiloader" id="apiloader-motherboard"><span></span></div>
+                    </p>
+                  </div>
+                  <div class="item-icon">
+                    <i class="fa-solid fa-chalkboard fa-2xl"></i>
+                  </div>
+                </div>
+
+                <div class="specs-item" id="ramDiv">
+                  <div class="item-text">
+                    <h3>RAM</h3>
+                    <p id="specs-ram">
+                    <div class="apiloader" id="apiloader-ram"><span></span></div>
+                    </p>
+                  </div>
+                  <div class="item-icon">
+                    <i class="fa-solid fa-memory fa-2xl"></i>
+                  </div>
+                </div>
+
+                <div class="specs-item" id="gpuDiv">
+                  <div class="item-text">
+                    <h3>GPU</h3>
+                    <p id="specs-gpu">
+                    <div class="apiloader" id="apiloader-gpu"><span></span></div>
+                    </p>
+                  </div>
+                  <div class="item-icon">
+                    <i class="fa-solid fa-tachograph-digital fa-2xl"></i>
+                  </div>
+                </div>
+
+                <div class="specs-item" id="storageDiv">
+                  <div class="item-text" id="specs-storage">
+                    <h3>STORAGE</h3>
+                    <div class="apiloader" id="apiloader-storage"><span></span></div>
+                  </div>
+                  <div class="item-icon">
+                    <i class="fa-solid fa-hard-drive fa-2xl"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Specs details -->
+            <div class="specs-details" id="detailsDiv">
+              <div class="details-container">
+                <div class="apiloader details-apiloader" id="apiloader-details"><span></span></div>
+                <div class="details-cpu item-details-container" id="details-cpu">
+                  <h3 class="details-header">CPU</h3>
+
+                  <p class="details-title">Model</p>
+                  <p class="selectable" id="cpu-model"></p>
+
+                  <p class="details-title">Manufacturer</p>
+                  <p class="selectable" id="cpu-manufacturer"></p>
+
+                  <p class="details-title">Socket</p>
+                  <p class="selectable" id="cpu-socket"></p>
+
+                  <p class="details-title">Speed</p>
+                  <p class="selectable" id="cpu-speed"></p>
+
+                  <p class="details-title">Cores</p>
+                  <p class="selectable" id="cpu-cores"></p>
+
+                  <p class="details-title">Physical Cores</p>
+                  <p class="selectable" id="cpu-physicalcores"></p>
+
+                  <p class="details-title">Model Number</p>
+                  <p class="selectable" id="cpu-modelnumber"></p>
+
+                  <p class="details-title">Family</p>
+                  <p class="selectable" id="cpu-family"></p>
+
+                </div>
+                <div class="details-motherboard item-details-container" id="details-motherboard">
+                  <h3 class="details-header">Motherboard</h3>
+
+                  <p class="details-title">Model</p>
+                  <p class="selectable" id="motherboard-model"></p>
+
+                  <p class="details-title">Manufacturer</p>
+                  <p class="selectable" id="motherboard-manufacturer"></p>
+
+                  <p class="details-title">Memory Slots</p>
+                  <p class="selectable" id="motherboard-memoryslots"></p>
+
+                  <p class="details-title">Serial</p>
+                  <p class="selectable" id="motherboard-serial"></p>
+
+                  <p class="details-title">Version</p>
+                  <p class="selectable" id="motherboard-version"></p>
+
+                </div>
+                <div class="details-ram item-details-container" id="details-ram">
+                  <h3 class="details-header">RAM</h3>
+
+                  <p class="details-title">Clock Speed</p>
+                  <p class="selectable" id="ram-speed"></p>
+
+                  <p class="details-title">Size Total</p>
+                  <p class="selectable" id="ram-size"></p>
+
+                  <p class="details-title">Size Per</p>
+                  <p class="selectable" id="ram-sizeper"></p>
+
+                  <p class="details-title">Type</p>
+                  <p class="selectable" id="ram-type"></p>
+
+                  <p class="details-title">Manufacturer</p>
+                  <p class="selectable" id="ram-manufacturer"></p>
+
+                  <p class="details-title">Part number</p>
+                  <p class="selectable" id="ram-partnumber"></p>
+
+                  <p class="details-title">Serial number</p>
+                  <p class="selectable" id="ram-serialnumber"></p>
+                </div>
+                <div class="details-gpu item-details-container" id="details-gpu">
+                  <h3 class="details-header">GPU</h3>
+
+                  <p class="details-title">Model</p>
+                  <p class="selectable" id="gpu-model"></p>
+
+                  <p class="details-title">Vendor</p>
+                  <p class="selectable" id="gpu-vendor"></p>
+
+                  <p class="details-title">Clock Core</p>
+                  <p class="selectable" id="gpu-clockcore"></p>
+
+                  <p class="details-title">Clock Memory</p>
+                  <p class="selectable" id="gpu-clockmemory"></p>
+
+                  <p class="details-title">VRAM</p>
+                  <p class="selectable" id="gpu-vram"></p>
+
+                  <p class="details-title">Bus</p>
+                  <p class="selectable" id="gpu-bus"></p>
+
+                  <p class="details-title">Driver Version</p>
+                  <p class="selectable" id="gpu-driver"></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
 
 
         </div>
