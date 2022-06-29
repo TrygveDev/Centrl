@@ -30,14 +30,16 @@
   </div>
   <div class="container" id="container">
     <div class="header drag">
-      <h1 class="header-title">Centrl by Trygve</p>
+      <h1 class="header-title" id="header-title">Centrl by Trygve v1.0.2</p>
       </h1>
-
       <div class="header-icons nodrag">
-        <div class="icons-minimize" id="minimize">
-          <i class="fa-solid fa-window-minimize nodrag"></i>
+        <div class="icons-header disableFunc" id="settings">
+          <i class="fa-solid fa-gear nodrag"></i>
         </div>
-        <div class="icons-xmark" id="xmark">
+        <div class="icons-header" id="minimize">
+          <i class="fa-solid fa-minus nodrag"></i>
+        </div>
+        <div class="icons-header" id="xmark">
           <i class="fa-solid fa-xmark nodrag"></i>
         </div>
       </div>
@@ -54,14 +56,14 @@
           <div class="clickable navitem navbar-item nodrag" id="usage">
             <i class="fa-solid fa-lg fa-microchip nodrag"></i>
           </div>
-          <div class="clickable navitem navbar-item nodrag" id="empty">
-            <i class="nodrag"></i>
+          <div class="clickable navitem navbar-item nodrag" id="cooling">
+            <i class="fa-solid fa-lg fa-fan nodrag"></i>
           </div>
-          <div class="clickable navitem navbar-item nodrag" id="empty">
-            <i class="nodrag"></i>
+          <div class="clickable navitem navbar-item nodrag" id="power">
+            <i class="fa-solid fa-lg fa-bolt-lightning nodrag"></i>
           </div>
-          <div class="clickable navitem navbar-item nodrag" id="empty">
-            <i class="nodrag"></i>
+          <div class="clickable navitem navbar-item nodrag" id="processes">
+            <i class="fa-solid fa-lg fa-magnifying-glass-chart nodrag"></i>
           </div>
         </div>
       </div>
@@ -75,15 +77,10 @@
           <div class="home-home">
             <div class="home-text">
               <h2>Welcome to centrl!</h2>
-              <p class="text-p">What is centrl? Well, centrl is a nice little tool to help you keep track of your pc.
-                Live usage information, spec list and more! </p>
-            </div>
-
-            <div class="home-profile">
-              <img class="profile-img" src="pictures/default.png">
-              <h3 class="profile-username">Not logged inn</h3>
-              <button class="profile-btn clickable" id="login-btn">Login with <i
-                  class="fa-brands fa-google"></i></button>
+              <p class="text-p">Centrl is a nice little tool to help you keep track of your pc.
+                List of pc hardware, live system usage and more! </p>
+              <p class="text-byline">In beta development by TrygveDev
+              </p>
             </div>
           </div>
 
@@ -95,7 +92,7 @@
             <h2>SPECS</h2>
           </div>
           <div class="specs-info">
-            <p>All of your pc hardware specs are nicely listed here. Pretty neat, right?</p>
+            <p class="tab-info">All of your pc hardware specs are nicely listed here. Pretty neat, right?</p>
           </div>
 
           <div class="specs-specs">
@@ -163,7 +160,7 @@
 
         <div class="content-usage category" id="usage-category">
           <h2>USAGE</h2>
-          <p id="usage-info">Here you can see all your system usage, in real time!</p>
+          <p id="tab-info">Here you can see all your system usage, in real time!</p>
 
           <div class="usage-usage">
 
@@ -200,27 +197,6 @@
                 <div class="useagebar-usage" id="useagebar-ram"></div>
               </div>
             </div>
-            <!-- DISK -->
-            <div class="usage-item" id="item-disk">
-              <i class="fa-solid fa-gauge fa-lg item-usageicon"></i>
-              <h3 class="item-title">DISK</h3>
-              <div class="item-usagedata">
-                <div class="usagedata-up" id="usagedata-up">
-                  <i class="fa-solid fa-arrow-up fa-sm usageicon-disk"></i>
-                  <p class="item-usage usagedata-text" id="usage-diskup">
-                  <div class="apiloader" id="apiloader-usediskup"><span></span></div>
-                  </p>
-                  <p class="usagedata-mbps">MB/s</p>
-                </div>
-                <div class="usagedata-down" id="usagedata-down">
-                  <i class="fa-solid fa-arrow-down fa-sm usageicon-disk"></i>
-                  <p class="item-usage usagedata-text" id="usage-diskdown">
-                  <div class="apiloader" id="apiloader-usediskdown"><span></span></div>
-                  </p>
-                  <p class="usagedata-mbps">MB/s</p>
-                </div>
-              </div>
-            </div>
             <!-- NETWORK -->
             <div class="usage-item" id="item-net">
               <i class="fa-solid fa-gauge fa-lg item-usageicon"></i>
@@ -242,10 +218,57 @@
                 </div>
               </div>
             </div>
+            <!-- PROCESSES -->
+            <div class="usage-item" id="item-processes">
+              <i class="fa-solid fa-gauge fa-lg item-usageicon"></i>
+              <h3 class="item-title">PROCESSES</h3>
+              <h6>RAM USAGE</h6>
+              <div class="item-usagedata">
+                <div class="usagedata-processes-container" id="processes-container">
+                  <div class="apiloader" id="apiloader-processes"><span></span></div>
+                </div>
+              </div>
+            </div>
+            <!-- STORAGE -->
+            <div class="usage-item" id="item-storage">
+              <i class="fa-solid fa-gauge fa-lg item-usageicon"></i>
+              <h3 class="item-title">STORAGE</h3>
+              <div class="item-usagedata">
+                <div class="usagedata-disk-container" id="disk-container">
+                  <div class="apiloader" id="apiloader-storage"><span></span></div>
+                </div>
+              </div>
+            </div>
+
 
           </div>
 
         </div>
+
+        <div class="content-cooling category" id="cooling-category">
+          <div class="cooling-cooling">
+            <h2>COOLING</h2>
+            <p id="tab-info">If all goes to plan, you will be able to se relevant information about cooling! <br>
+              Still under heavy development.</p>
+          </div>
+        </div>
+
+        <div class="content-power category" id="power-category">
+          <div class="power-power">
+            <h2>POWER</h2>
+            <p id="tab-info">If all goes to plan, you will be able to se relevant information about power! <br>
+              Still under heavy development.</p>
+          </div>
+        </div>
+
+        <div class="content-processes category" id="processes-category">
+          <div class="processes-processes">
+            <h2>PROCESSES</h2>
+            <p id="tab-info">If all goes to plan, you will be able to se relevant information about processes! <br>
+              Still under heavy development.</p>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -254,7 +277,6 @@
   </div>
 
   <!-- You can also require other files to run in this process -->
-  <script src="firebase.js" type="module"></script>
   <script src="index.js"></script>
 </body>
 

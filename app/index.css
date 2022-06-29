@@ -12,7 +12,8 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #383b3e;
+  /* background: #383b3e; */
+  opacity: 0;
 }
 
 /* Handle */
@@ -69,7 +70,8 @@
   font-family: "Roboto";
   padding: 3px 3px 0 3px;
   width: 150px;
-  height: 50px;
+  min-height: 50px;
+  max-height: 50px;
   border-radius: 12px;
   text-align: center;
   overflow: hidden;
@@ -91,7 +93,7 @@
   width: 100%;
   height: 5px;
   background-color: white;
-  animation: popup-loader 10s linear;
+  animation: popup-loader 5s linear;
 }
 @keyframes popup-loader {
   0% {
@@ -150,9 +152,7 @@
   justify-content: center;
   height: 100%;
 }
-.icons-minimize,
-.icons-maximize,
-.icons-xmark {
+.icons-header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -161,9 +161,7 @@
   height: 100%;
 }
 
-.icons-minimize:hover,
-.icons-maximize:hover,
-.icons-xmark:hover {
+.icons-header:hover {
   background-color: #121516;
 }
 
@@ -235,53 +233,33 @@
 .home-home {
   display: flex;
   overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 .home-text {
-  width: 50%;
+  width: 65%;
   height: 490px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 30%;
-}
-.home-profile {
-  width: 50%;
-  height: 490px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20%;
-  overflow: contain;
+  padding-top: 27%;
 }
 .text-p {
   text-align: center;
   margin-top: 10px;
 }
-.profile-img {
-  width: 150px;
-  border-radius: 100px;
-  pointer-events: none;
-}
-.profile-username {
-  margin-top: 10px;
-}
-.profile-btn {
-  border-radius: 10px;
-  margin-top: 10px;
-  width: 100px;
-  height: 35px;
-  color: white;
-  background-color: #121516;
-  border: 0;
-}
-.profile-btn:hover {
-  background-color: #000;
+.text-byline {
+  padding-top: 5%;
+  text-align: center;
+  color: gray;
 }
 
 /* SPECS */
 
 .specs-specs {
   width: 500px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 .specs-info {
   width: 100%;
@@ -293,8 +271,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-  padding: 5px 8px 5px 8px;
-  width: 450px;
+  padding: 5px 0px 5px 8px;
+  width: 480px;
   min-height: 50px;
   border-radius: 12px;
   background-color: #121516;
@@ -314,13 +292,13 @@
   display: flex;
   flex-direction: row;
   flex-flow: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   height: 440px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
-#usage-info {
+#tab-info {
   color: gray;
 }
 .item-usageicon {
@@ -333,8 +311,8 @@
   flex-direction: column;
 
   overflow: hidden;
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   background-color: #121516;
   border-radius: 12px;
   margin-top: 18px;
@@ -350,12 +328,13 @@
   width: 75px;
   height: 10px;
   border-radius: 12px;
-  background-color: white;
+  overflow: hidden;
+  background-color: #494c51;
 }
 .useagebar-usage {
   overflow: hidden;
   width: 0%;
-  height: 10px;
+  height: 100%;
   border-radius: 12px;
   background-color: white;
 }
@@ -380,9 +359,67 @@
   align-items: center;
   flex-direction: column;
 }
-.usageicon-disk,
 .usageicon-net {
   margin: 10px 0 10px 0;
+}
+
+.usagedata-disk-container {
+  height: 80px;
+  width: 175px;
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.usagedata-disk {
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  align-items: space-around;
+  flex-direction: row;
+}
+
+.diskname {
+  width: 25%;
+}
+
+.disk-usage-resizsed {
+  width: 120px;
+  height: 20px;
+}
+
+.usagePercent {
+  margin-top: 2px;
+  margin-left: 65px;
+  font-size: 0.8rem;
+  position: fixed;
+  color: white;
+}
+
+.usagedata-processes-container {
+  font-size: 0.75rem;
+}
+.process-item {
+  width: 150px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+.process-item-name {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.process-item-usage {
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
 }
 
 /* Loader */

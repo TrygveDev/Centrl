@@ -119,7 +119,6 @@ ipc.on('update', () => {
 app.on('ready', function () {
     createDefaultWindow();
     autoUpdater.checkForUpdates();
-
     // UNCOMMENT IF NPM START IS USED
     win.close();
     createWindow()
