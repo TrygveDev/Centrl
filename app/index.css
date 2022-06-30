@@ -50,6 +50,7 @@
   width: 100%;
   position: fixed;
   pointer-events: none;
+  z-index: 10;
 }
 .popup-feed {
   float: right;
@@ -330,19 +331,36 @@
   overflow: hidden;
 }
 .details-apiloader {
-  margin: 195px 0 0 125px;
+  margin: 165px 0 0 105px;
 }
-/* SPECS CPU */
+/* SPECS DETAILS */
 .item-details-container {
   display: none;
-  width: 275px;
-  height: 415px;
+  width: 235px;
+  height: 390px;
   padding: 20px 20px 20px 20px;
+}
+.details-data-loading {
+  display: none;
 }
 .details-title {
   color: gray;
   margin-top: 10px;
   font-size: 0.8rem;
+}
+.details-storage,
+.details-ram {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.list-bottom-seperator {
+  margin-bottom: 40px;
+}
+.list-header {
+  margin-bottom: 20px;
+}
+.list-indent {
+  margin-left: 5px;
 }
 
 /* Usage */

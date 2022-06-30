@@ -170,101 +170,139 @@
             <!-- Specs details -->
             <div class="specs-details" id="detailsDiv">
               <div class="details-container">
-                <div class="apiloader details-apiloader" id="apiloader-details"><span></span></div>
                 <div class="details-cpu item-details-container" id="details-cpu">
-                  <h3 class="details-header">CPU</h3>
+                  <div class="apiloader details-apiloader" id="apiloader-details-cpu"><span></span></div>
+                  <div class="details-data-loading" id="details-data-loading-cpu">
+                    <h3 class="details-header">CPU</h3>
 
-                  <p class="details-title">Model</p>
-                  <p class="selectable" id="cpu-model"></p>
+                    <p class="details-title">Model</p>
+                    <p class="selectable" id="cpu-model"></p>
 
-                  <p class="details-title">Manufacturer</p>
-                  <p class="selectable" id="cpu-manufacturer"></p>
+                    <p class="details-title">Manufacturer</p>
+                    <p class="selectable" id="cpu-manufacturer"></p>
 
-                  <p class="details-title">Socket</p>
-                  <p class="selectable" id="cpu-socket"></p>
+                    <p class="details-title">Socket</p>
+                    <p class="selectable" id="cpu-socket"></p>
 
-                  <p class="details-title">Speed</p>
-                  <p class="selectable" id="cpu-speed"></p>
+                    <p class="details-title">Speed</p>
+                    <p class="selectable" id="cpu-speed"></p>
 
-                  <p class="details-title">Cores</p>
-                  <p class="selectable" id="cpu-cores"></p>
+                    <p class="details-title">Cores</p>
+                    <p class="selectable" id="cpu-cores"></p>
 
-                  <p class="details-title">Physical Cores</p>
-                  <p class="selectable" id="cpu-physicalcores"></p>
+                    <p class="details-title">Physical Cores</p>
+                    <p class="selectable" id="cpu-physicalcores"></p>
 
-                  <p class="details-title">Model Number</p>
-                  <p class="selectable" id="cpu-modelnumber"></p>
+                    <p class="details-title">Model Number</p>
+                    <p class="selectable" id="cpu-modelnumber"></p>
 
-                  <p class="details-title">Family</p>
-                  <p class="selectable" id="cpu-family"></p>
+                    <p class="details-title">Family</p>
+                    <p class="selectable" id="cpu-family"></p>
+                  </div>
+
 
                 </div>
                 <div class="details-motherboard item-details-container" id="details-motherboard">
-                  <h3 class="details-header">Motherboard</h3>
+                  <div class="apiloader details-apiloader" id="apiloader-details-motherboard"><span></span></div>
+                  <div class="details-data-loading" id="details-data-loading-motherboard">
+                    <h3 class="details-header">Motherboard</h3>
 
-                  <p class="details-title">Model</p>
-                  <p class="selectable" id="motherboard-model"></p>
+                    <p class="details-title">Model</p>
+                    <p class="selectable" id="motherboard-model"></p>
 
-                  <p class="details-title">Manufacturer</p>
-                  <p class="selectable" id="motherboard-manufacturer"></p>
+                    <p class="details-title">Manufacturer</p>
+                    <p class="selectable" id="motherboard-manufacturer"></p>
 
-                  <p class="details-title">Memory Slots</p>
-                  <p class="selectable" id="motherboard-memoryslots"></p>
+                    <p class="details-title">Memory Slots</p>
+                    <p class="selectable" id="motherboard-memoryslots"></p>
 
-                  <p class="details-title">Serial</p>
-                  <p class="selectable" id="motherboard-serial"></p>
+                    <p class="details-title">Serial</p>
+                    <p class="selectable" id="motherboard-serial"></p>
 
-                  <p class="details-title">Version</p>
-                  <p class="selectable" id="motherboard-version"></p>
+                    <p class="details-title">Version</p>
+                    <p class="selectable" id="motherboard-version"></p>
+
+                  </div>
 
                 </div>
                 <div class="details-ram item-details-container" id="details-ram">
-                  <h3 class="details-header">RAM</h3>
+                  <div class="apiloader details-apiloader" id="apiloader-details-ram"><span></span></div>
+                  <div class="details-data-loading" id="details-data-loading-ram">
+                    <h3 class="details-header list-header">RAM</h3>
 
-                  <p class="details-title">Clock Speed</p>
-                  <p class="selectable" id="ram-speed"></p>
+                    <template id="details-ram-template">
+                      <h4 id="ram-number"></h4>
+                      <p class="details-title list-indent">Clock Speed</p>
+                      <p class="selectable list-indent" id="ram-speed"></p>
 
-                  <p class="details-title">Size Total</p>
-                  <p class="selectable" id="ram-size"></p>
+                      <p class="details-title list-indent">Size</p>
+                      <p class="selectable list-indent" id="ram-size"></p>
 
-                  <p class="details-title">Size Per</p>
-                  <p class="selectable" id="ram-sizeper"></p>
+                      <p class="details-title list-indent">Type</p>
+                      <p class="selectable list-indent" id="ram-type"></p>
 
-                  <p class="details-title">Type</p>
-                  <p class="selectable" id="ram-type"></p>
+                      <p class="details-title list-indent">Manufacturer</p>
+                      <p class="selectable list-indent" id="ram-manufacturer"></p>
 
-                  <p class="details-title">Manufacturer</p>
-                  <p class="selectable" id="ram-manufacturer"></p>
+                      <p class="details-title list-indent">Part number</p>
+                      <p class="selectable list-indent" id="ram-partnumber"></p>
 
-                  <p class="details-title">Part number</p>
-                  <p class="selectable" id="ram-partnumber"></p>
+                      <p class="details-title list-indent">Serial number</p>
+                      <p class="selectable list-bottom-seperator list-indent" id="ram-serialnumber"></p>
+                    </template>
+                  </div>
 
-                  <p class="details-title">Serial number</p>
-                  <p class="selectable" id="ram-serialnumber"></p>
                 </div>
                 <div class="details-gpu item-details-container" id="details-gpu">
-                  <h3 class="details-header">GPU</h3>
+                  <div class="apiloader details-apiloader" id="apiloader-details-gpu"><span></span></div>
+                  <div class="details-data-loading" id="details-data-loading-gpu">
+                    <h3 class="details-header">GPU</h3>
 
-                  <p class="details-title">Model</p>
-                  <p class="selectable" id="gpu-model"></p>
+                    <p class="details-title">Model</p>
+                    <p class="selectable" id="gpu-model"></p>
 
-                  <p class="details-title">Vendor</p>
-                  <p class="selectable" id="gpu-vendor"></p>
+                    <p class="details-title">Vendor</p>
+                    <p class="selectable" id="gpu-vendor"></p>
 
-                  <p class="details-title">Clock Core</p>
-                  <p class="selectable" id="gpu-clockcore"></p>
+                    <p class="details-title">Clock Core</p>
+                    <p class="selectable" id="gpu-clockcore"></p>
 
-                  <p class="details-title">Clock Memory</p>
-                  <p class="selectable" id="gpu-clockmemory"></p>
+                    <p class="details-title">Clock Memory</p>
+                    <p class="selectable" id="gpu-clockmemory"></p>
 
-                  <p class="details-title">VRAM</p>
-                  <p class="selectable" id="gpu-vram"></p>
+                    <p class="details-title">VRAM</p>
+                    <p class="selectable" id="gpu-vram"></p>
 
-                  <p class="details-title">Bus</p>
-                  <p class="selectable" id="gpu-bus"></p>
+                    <p class="details-title">Bus</p>
+                    <p class="selectable" id="gpu-bus"></p>
 
-                  <p class="details-title">Driver Version</p>
-                  <p class="selectable" id="gpu-driver"></p>
+                    <p class="details-title">Driver Version</p>
+                    <p class="selectable" id="gpu-driver"></p>
+                  </div>
+
+
+                </div>
+                <div class="details-storage item-details-container" id="details-storage">
+                  <div class="apiloader details-apiloader" id="apiloader-details-storage"><span></span></div>
+                  <div class="details-data-loading" id="details-data-loading-storage">
+                    <h3 class="details-header list-header">Storage</h3>
+
+                    <template id="details-storage-template">
+                      <h4 id="storage-disk-number"></h4>
+                      <p class="details-title list-indent">Name</p>
+                      <p class="selectable list-indent" id="storage-name"></p>
+
+                      <p class="details-title list-indent">Size</p>
+                      <p class="selectable list-indent" id="storage-size"></p>
+
+                      <p class="details-title list-indent">Type</p>
+                      <p class="selectable list-indent" id="storage-type"></p>
+
+                      <p class="details-title list-indent">Vendor</p>
+                      <p class="selectable list-bottom-seperator list-indent" id="storage-vendor"></p>
+                    </template>
+                  </div>
+
 
                 </div>
               </div>

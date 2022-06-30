@@ -12,7 +12,7 @@ document.querySelectorAll('.category').forEach(item => {
 
 
 // STARTING PAGE
-var startPage = 'specs'
+var startPage = 'home'
 document.getElementById(startPage).style.backgroundColor = '#000000'
 document.getElementById(startPage + '-category').style.display = 'flex'
 
@@ -102,46 +102,36 @@ document.getElementById('requestfeature').addEventListener('click', () => {
 
 
 // Specs
-
-const detailsDiv = document.getElementById('detailsDiv')
 const cpuDiv = document.getElementById('cpuDiv')
 const motherboardDiv = document.getElementById('motherboardDiv')
 const ramDiv = document.getElementById('ramDiv')
 const gpuDiv = document.getElementById('gpuDiv')
+const storageDiv = document.getElementById('storageDiv');
 
 cpuDiv.style.backgroundColor = 'black'
 
-document.querySelectorAll('.specs-item').forEach(item => {
-    item.addEventListener('click', () => {
-        document.querySelectorAll('.specs-item').forEach(item => {
-            item.style.backgroundColor = '#121516'
-        })
-        item.style.backgroundColor = 'black'
-        document.querySelectorAll('.item-details-container').forEach(item => {
-            item.style.display = 'none'
-        })
-    })
-})
-cpuDiv.addEventListener('click', () => {
-    document.getElementById('details-cpu').style.display = 'block';
-})
-motherboardDiv.addEventListener('click', () => {
-    document.getElementById('details-motherboard').style.display = 'block';
-})
-ramDiv.addEventListener('click', () => {
-    document.getElementById('details-ram').style.display = 'block';
-})
-gpuDiv.addEventListener('click', () => {
-    document.getElementById('details-gpu').style.display = 'block';
-})
+// document.querySelectorAll('.specs-item').forEach(item => {
+//     item.addEventListener('click', () => {
+//         document.querySelectorAll('.specs-item').forEach(item => {
+//             item.style.backgroundColor = '#121516'
+//         })
+//         item.style.backgroundColor = 'black'
+//         document.querySelectorAll('.item-details-container').forEach(item => {
+//             item.style.display = 'none'
+//         })
+//     })
+// })
+
+document.getElementById('details-cpu').style.display = "block";
 
 si.cpu()
     .then(data => {
         document.getElementById('apiloader-cpu').style.display = "none";
-        document.getElementById('apiloader-details').style.display = "none";
+        document.getElementById('apiloader-details-cpu').style.display = "none";
+        document.getElementById('details-data-loading-cpu').style.display = "block";
+
         document.getElementById('specs-cpu').textContent = data.brand
 
-        document.getElementById('details-cpu').style.display = "block";
         document.getElementById('cpu-model').textContent = data.brand
         document.getElementById('cpu-manufacturer').textContent = data.manufacturer
         document.getElementById('cpu-socket').textContent = data.socket
@@ -150,11 +140,24 @@ si.cpu()
         document.getElementById('cpu-physicalcores').textContent = data.physicalCores
         document.getElementById('cpu-modelnumber').textContent = data.model
         document.getElementById('cpu-family').textContent = data.family
+
+        cpuDiv.addEventListener('click', () => {
+            document.querySelectorAll('.item-details-container').forEach(item => {
+                item.style.display = 'none'
+            })
+            document.getElementById('details-cpu').style.display = 'block';
+            document.querySelectorAll('.specs-item').forEach(item => {
+                item.style.backgroundColor = '#121516'
+            })
+            document.getElementById('cpuDiv').style.backgroundColor = 'black'
+        })
     })
 
 si.baseboard()
     .then(data => {
         document.getElementById('apiloader-motherboard').style.display = "none";
+        document.getElementById('apiloader-details-motherboard').style.display = "none";
+        document.getElementById('details-data-loading-motherboard').style.display = "block";
         document.getElementById('specs-motherboard').textContent = data.model
 
         document.getElementById('motherboard-model').textContent = data.model
@@ -162,27 +165,59 @@ si.baseboard()
         document.getElementById('motherboard-memoryslots').textContent = data.memSlots
         document.getElementById('motherboard-serial').textContent = data.serial
         document.getElementById('motherboard-version').textContent = data.version
+
+        motherboardDiv.addEventListener('click', () => {
+            document.querySelectorAll('.item-details-container').forEach(item => {
+                item.style.display = 'none'
+            })
+            document.getElementById('details-motherboard').style.display = 'block';
+            document.querySelectorAll('.specs-item').forEach(item => {
+                item.style.backgroundColor = '#121516'
+            })
+            document.getElementById('motherboardDiv').style.backgroundColor = 'black'
+        })
     })
 
 si.memLayout()
     .then(data => {
         document.getElementById('apiloader-ram').style.display = "none";
+        document.getElementById('apiloader-details-ram').style.display = "none";
+        document.getElementById('details-data-loading-ram').style.display = "block";
         var size = (data[0].size / 1024 / 1024 / 1024).toFixed(0)
         document.getElementById('specs-ram').textContent = data.length + "x " + size + "GB " + data[0].type + " " + data[0].clockSpeed + "Mhz"
 
-        const ram = data[0]
-        document.getElementById('ram-speed').textContent = ram.clockSpeed + "GHz"
-        document.getElementById('ram-size').textContent = (size * data.length) + "GB"
-        document.getElementById('ram-sizeper').textContent = size + "GB";
-        document.getElementById('ram-type').textContent = ram.formFactor + " " + ram.type
-        document.getElementById('ram-manufacturer').textContent = ram.manufacturer
-        document.getElementById('ram-partnumber').textContent = ram.partNum
-        document.getElementById('ram-serialnumber').textContent = ram.serialNum
+        data.forEach((item) => {
+            var template = document.getElementById('details-ram-template');
+            var clone = template.content.cloneNode(true);
+            clone.getElementById('ram-number').textContent = "RAM Stick " + (data.indexOf(item) + 1)
+            clone.getElementById('ram-speed').textContent = item.clockSpeed + "GHz"
+            clone.getElementById('ram-size').textContent = (item.size / 1024 / 1024 / 1024).toFixed(0) + "GB"
+            clone.getElementById('ram-type').textContent = item.formFactor + " " + item.type
+            clone.getElementById('ram-manufacturer').textContent = item.manufacturer
+            clone.getElementById('ram-partnumber').textContent = item.partNum
+            clone.getElementById('ram-serialnumber').textContent = item.serialNum
+            document.getElementById('details-ram').appendChild(clone);
+
+            ramDiv.addEventListener('click', () => {
+                document.querySelectorAll('.item-details-container').forEach(item => {
+                    item.style.display = 'none'
+                })
+                document.getElementById('details-ram').style.display = 'block';
+                document.querySelectorAll('.specs-item').forEach(item => {
+                    item.style.backgroundColor = '#121516'
+                })
+                document.getElementById('ramDiv').style.backgroundColor = 'black'
+            })
+        })
+
+
     })
 
 si.graphics()
     .then(data => {
         document.getElementById('apiloader-gpu').style.display = "none";
+        document.getElementById('apiloader-details-gpu').style.display = "none";
+        document.getElementById('details-data-loading-gpu').style.display = "block";
         document.getElementById('specs-gpu').textContent = data.controllers[0].model
 
         var data = data.controllers[0]
@@ -193,22 +228,49 @@ si.graphics()
         document.getElementById('gpu-vram').textContent = data.vram + " MB"
         document.getElementById('gpu-bus').textContent = data.bus
         document.getElementById('gpu-driver').textContent = data.driverVersion
+
+        gpuDiv.addEventListener('click', () => {
+            document.querySelectorAll('.item-details-container').forEach(item => {
+                item.style.display = 'none'
+            })
+            document.getElementById('details-gpu').style.display = 'block';
+            document.querySelectorAll('.specs-item').forEach(item => {
+                item.style.backgroundColor = '#121516'
+            })
+            document.getElementById('gpuDiv').style.backgroundColor = 'black'
+        })
     })
 
 si.diskLayout()
     .then(data => {
         document.getElementById('apiloader-storage').style.display = "none";
+        document.getElementById('apiloader-details-storage').style.display = "none";
+        document.getElementById('details-data-loading-storage').style.display = "block";
         data.forEach(item => {
-            var size = item.size / 1000000000000
+            var size = (item.size / 1024 / 1024 / 1024)
             var disk = document.createElement('p')
             disk.id = item.name
-            disk.className = "selectable"
             document.getElementById('specs-storage').appendChild(disk)
-            document.getElementById(item.name).textContent = item.name + " " + item.type + " " + size.toFixed(1) + "TB\n"
-            disk.addEventListener('click', () => {
-                navigator.clipboard.writeText(disk.textContent)
-                window.getSelection().removeAllRanges()
-                popup("Copied to clipboard", "gray")
+            document.getElementById(item.name).textContent = item.name
+
+            var template = document.getElementById('details-storage-template');
+            var clone = template.content.cloneNode(true);
+            clone.getElementById('storage-disk-number').textContent = "Disk " + (data.indexOf(item) + 1)
+            clone.getElementById('storage-name').textContent = item.name;
+            clone.getElementById('storage-size').textContent = size.toFixed(0) + "GB";
+            clone.getElementById('storage-type').textContent = item.type;
+            clone.getElementById('storage-vendor').textContent = item.vendor;
+            document.getElementById('details-storage').appendChild(clone);
+
+            storageDiv.addEventListener('click', () => {
+                document.querySelectorAll('.item-details-container').forEach(item => {
+                    item.style.display = 'none'
+                })
+                document.getElementById('details-storage').style.display = "block"
+                document.querySelectorAll('.specs-item').forEach(item => {
+                    item.style.backgroundColor = '#121516'
+                })
+                document.getElementById('storageDiv').style.backgroundColor = 'black'
             })
         })
 
