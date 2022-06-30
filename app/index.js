@@ -95,7 +95,7 @@ document.getElementById('reportbug').addEventListener('click', (e) => {
     e.preventDefault();
     shell.openExternal("https://github.com/TrygveDev/Centrl/issues");
 })
-document.getElementById('requestfeature').addEventListener('click', () => {
+document.getElementById('requestfeature').addEventListener('click', (e) => {
     e.preventDefault();
     shell.openExternal("https://github.com/TrygveDev/Centrl/issues");
 })
@@ -208,9 +208,8 @@ si.memLayout()
                 })
                 document.getElementById('ramDiv').style.backgroundColor = 'black'
             })
+            refreshSelectables()
         })
-
-
     })
 
 si.graphics()
@@ -272,18 +271,25 @@ si.diskLayout()
                 })
                 document.getElementById('storageDiv').style.backgroundColor = 'black'
             })
+
+            refreshSelectables()
         })
 
     })
     .catch(error => console.error(error));
-
-document.querySelectorAll('.selectable').forEach(item => {
-    item.addEventListener('click', () => {
-        navigator.clipboard.writeText(item.textContent)
-        window.getSelection().removeAllRanges()
-        popup("Copied to clipboard", "gray")
+function refreshSelectables() {
+    document.querySelectorAll('.selectable').forEach(item => {
+        item.replaceWith(item.cloneNode(true));
     })
-})
+    document.querySelectorAll('.selectable').forEach(item => {
+        item.addEventListener('click', () => {
+            navigator.clipboard.writeText(item.textContent)
+            window.getSelection().removeAllRanges()
+            popup("Copied to clipboard", "gray")
+        })
+    })
+}
+refreshSelectables()
 
 
 // Usage
