@@ -78,15 +78,15 @@ home.addEventListener('click', () => {
 })
 cooling.addEventListener('click', () => {
     document.getElementById('cooling-category').style.display = 'block'
-    popup("Cooling is under heavy development.", "orange")
+    popup("Cooling is under development.", "orange")
 })
 power.addEventListener('click', () => {
     document.getElementById('power-category').style.display = 'block'
-    popup("Power is under heavy development.", "orange")
+    popup("Power is under development.", "orange")
 })
 processes.addEventListener('click', () => {
     document.getElementById('processes-category').style.display = 'block'
-    popup("Processes is under heavy development.", "orange")
+    popup("Processes is under development.", "orange")
 })
 
 
@@ -109,18 +109,6 @@ const gpuDiv = document.getElementById('gpuDiv')
 const storageDiv = document.getElementById('storageDiv');
 
 cpuDiv.style.backgroundColor = 'black'
-
-// document.querySelectorAll('.specs-item').forEach(item => {
-//     item.addEventListener('click', () => {
-//         document.querySelectorAll('.specs-item').forEach(item => {
-//             item.style.backgroundColor = '#121516'
-//         })
-//         item.style.backgroundColor = 'black'
-//         document.querySelectorAll('.item-details-container').forEach(item => {
-//             item.style.display = 'none'
-//         })
-//     })
-// })
 
 document.getElementById('details-cpu').style.display = "block";
 
@@ -292,8 +280,7 @@ function refreshSelectables() {
 refreshSelectables()
 
 
-// Usage
-setInterval(() => {
+function updateCPU() {
     cpu.usage()
         .then(data => {
             document.getElementById('apiloader-usecpu').style.display = "none";
@@ -307,8 +294,13 @@ setInterval(() => {
             } else if (cpuUsage > 80) {
                 document.getElementById('useagebar-cpu').style.backgroundColor = 'red'
             }
+            setTimeout(() => { updateCPU(); }, 1000)
         })
+}
+updateCPU()
 
+
+function updateGra() {
     si.graphics()
         .then(data => {
             document.getElementById('apiloader-usegpu').style.display = "none";
@@ -322,8 +314,13 @@ setInterval(() => {
             } else if (gpuUsage.toFixed(0) > 80) {
                 document.getElementById('useagebar-gpu').style.backgroundColor = 'red'
             }
+            setTimeout(() => { updateGra(); }, 1000)
         })
 
+}
+updateGra()
+
+function updateMem() {
     si.mem()
         .then(data => {
             document.getElementById('apiloader-useram').style.display = "none";
@@ -340,16 +337,13 @@ setInterval(() => {
             } else if (ramUsage.toFixed(0) > 80) {
                 document.getElementById('useagebar-ram').style.backgroundColor = 'red'
             }
+            setTimeout(() => { updateMem(); }, 1000)
         })
 
-    si.networkStats()
-        .then(data => {
-            document.getElementById('apiloader-usenetup').style.display = "none";
-            document.getElementById('apiloader-usenetdown').style.display = "none";
-            document.getElementById('usage-netdown').textContent = Math.round(data[0].rx_sec / 1024)
-            document.getElementById('usage-netup').textContent = Math.round(data[0].tx_sec / 1024)
-        })
+}
+updateMem()
 
+function updatePro() {
     si.processes()
         .then(data => {
             var list = [];
@@ -391,8 +385,25 @@ setInterval(() => {
                 name.textContent = process.name
                 usage.textContent = process.mem.toFixed(1) + "%"
             })
+            setTimeout(() => { updatePro(); }, 1000)
+        })
+}
+updatePro()
+
+function updateNet() {
+    si.networkStats()
+        .then(data => {
+            document.getElementById('apiloader-usenetup').style.display = "none";
+            document.getElementById('apiloader-usenetdown').style.display = "none";
+            document.getElementById('usage-netdown').textContent = Math.round(data[0].rx_sec / 1024)
+            document.getElementById('usage-netup').textContent = Math.round(data[0].tx_sec / 1024)
+            setTimeout(() => { updateNet(); }, 1000)
         })
 
+}
+updateNet()
+
+function updateDis() {
     si.fsSize()
         .then(data => {
             document.getElementById('disk-container').innerHTML = "";
@@ -431,8 +442,9 @@ setInterval(() => {
                     usage.style.backgroundColor = 'red'
                 }
             })
+            setTimeout(() => { updateDis(); }, 1000)
         })
-}, 1000)
-
+}
+updateDis()
 
 document.getElementById('loader').style.display = 'none';
