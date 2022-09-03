@@ -67,26 +67,56 @@ document.querySelectorAll('.navitem').forEach(button => {
         })
     })
 })
+
+var currentPage = startPage;
+
 specs.addEventListener('click', () => {
     document.getElementById('specs-category').style.display = 'flex'
+    currentPage = 'specs';
 })
 usage.addEventListener('click', () => {
     document.getElementById('usage-category').style.display = 'block'
+    if (currentPage != 'usage') {
+        currentPage = 'usage';
+        updateCPU();
+        updateGra();
+        updateMem();
+        updatePro();
+        updateNet();
+        updateDis();
+    }
 })
 home.addEventListener('click', () => {
     document.getElementById('home-category').style.display = 'block'
+    if (currentPage != 'home') {
+        currentPage = 'home';
+    }
+
 })
 cooling.addEventListener('click', () => {
     document.getElementById('cooling-category').style.display = 'block'
-    popup("Cooling is under development.", "orange")
+    if (currentPage != 'cooling') {
+        currentPage = 'cooling';
+        popup('CPU temp is inaccurate!', 'orange')
+        updateCPUTemp()
+        updateGPUTemp()
+    }
 })
 power.addEventListener('click', () => {
     document.getElementById('power-category').style.display = 'block'
-    popup("Power is under development.", "orange")
+    if (currentPage != 'power') {
+        currentPage = 'power';
+        popup("Power is under development.", "orange")
+    }
+
 })
 processes.addEventListener('click', () => {
     document.getElementById('processes-category').style.display = 'block'
-    popup("Processes is under development.", "orange")
+    if (currentPage != 'processes') {
+        currentPage = 'processes';
+        popup("Processes is under development.", "orange")
+    }
+
 })
 
 
@@ -264,7 +294,6 @@ si.diskLayout()
         })
 
     })
-    .catch(error => console.error(error));
 function refreshSelectables() {
     document.querySelectorAll('.selectable').forEach(item => {
         item.replaceWith(item.cloneNode(true));
@@ -278,7 +307,6 @@ function refreshSelectables() {
     })
 }
 refreshSelectables()
-
 
 function updateCPU() {
     cpu.usage()
@@ -294,10 +322,11 @@ function updateCPU() {
             } else if (cpuUsage > 80) {
                 document.getElementById('useagebar-cpu').style.backgroundColor = 'red'
             }
-            setTimeout(() => { updateCPU(); }, 1000)
+            if (currentPage == 'usage') {
+                setTimeout(() => { updateCPU(); }, 1000)
+            }
         })
 }
-updateCPU()
 
 
 function updateGra() {
@@ -314,11 +343,11 @@ function updateGra() {
             } else if (gpuUsage.toFixed(0) > 80) {
                 document.getElementById('useagebar-gpu').style.backgroundColor = 'red'
             }
-            setTimeout(() => { updateGra(); }, 1000)
+            if (currentPage == 'usage') { setTimeout(() => { updateGra(); }, 1000) }
+
         })
 
 }
-updateGra()
 
 function updateMem() {
     si.mem()
@@ -337,11 +366,11 @@ function updateMem() {
             } else if (ramUsage.toFixed(0) > 80) {
                 document.getElementById('useagebar-ram').style.backgroundColor = 'red'
             }
-            setTimeout(() => { updateMem(); }, 1000)
+            if (currentPage == 'usage') { setTimeout(() => { updateMem(); }, 1000) }
+
         })
 
 }
-updateMem()
 
 function updatePro() {
     si.processes()
@@ -385,10 +414,10 @@ function updatePro() {
                 name.textContent = process.name
                 usage.textContent = process.mem.toFixed(1) + "%"
             })
-            setTimeout(() => { updatePro(); }, 1000)
+            if (currentPage == 'usage') { setTimeout(() => { updatePro(); }, 1000) }
+
         })
 }
-updatePro()
 
 function updateNet() {
     si.networkStats()
@@ -397,11 +426,11 @@ function updateNet() {
             document.getElementById('apiloader-usenetdown').style.display = "none";
             document.getElementById('usage-netdown').textContent = Math.round(data[0].rx_sec / 1024)
             document.getElementById('usage-netup').textContent = Math.round(data[0].tx_sec / 1024)
-            setTimeout(() => { updateNet(); }, 1000)
+            if (currentPage == 'usage') { setTimeout(() => { updateNet(); }, 1000) }
+
         })
 
 }
-updateNet()
 
 function updateDis() {
     si.fsSize()
@@ -442,9 +471,68 @@ function updateDis() {
                     usage.style.backgroundColor = 'red'
                 }
             })
-            setTimeout(() => { updateDis(); }, 1000)
+
+            if (currentPage == 'usage') { setTimeout(() => { updateDis(); }, 10000) }
         })
 }
-updateDis()
+
+
+
+// TEMPERATURE
+function updateCPUTemp() {
+    si.cpuTemperature()
+        .then(data => {
+            document.getElementById('apiloader-tempcpu').style.display = "none";
+            var cpuTemp = data.main
+            if (cpuTemp != null) {
+                document.getElementById('temp-cpu').textContent = cpuTemp + '°C'
+                document.getElementById('tempbar-cpu').style.width = cpuTemp + '%'
+                if (cpuTemp <= 60) {
+                    document.getElementById('tempbar-cpu').style.backgroundColor = 'yellowgreen'
+                } else if (cpuTemp > 60 && cpuTemp <= 80) {
+                    document.getElementById('tempbar-cpu').style.backgroundColor = 'yellow'
+                } else if (cpuTemp > 80) {
+                    document.getElementById('tempbar-cpu').style.backgroundColor = 'red'
+                }
+                if (currentPage == 'cooling') { setTimeout(() => { updateCPUTemp(); }, 1000) }
+
+            } else {
+                document.getElementById('temp-cpu').textContent = 'Unsupported'
+                document.getElementById('temp-cpu').style.color = 'gray'
+                document.getElementById('temp-cpu').style.fontSize = '1.5rem'
+                document.getElementById('item-tempbar').style.display = 'none'
+            }
+
+
+        })
+}
+
+function updateGPUTemp() {
+    si.graphics()
+        .then(data => {
+            document.getElementById('apiloader-tempgpu').style.display = "none";
+            var gpuTemp = data.controllers[0].temperatureGpu
+            if (gpuTemp != null) {
+                document.getElementById('temp-gpu').textContent = gpuTemp + '°C'
+                document.getElementById('tempbar-gpu').style.width = gpuTemp + '%'
+                if (gpuTemp <= 60) {
+                    document.getElementById('tempbar-gpu').style.backgroundColor = 'yellowgreen'
+                } else if (gpuTemp > 60 && gpuTemp <= 80) {
+                    document.getElementById('tempbar-gpu').style.backgroundColor = 'yellow'
+                } else if (gpuTemp > 80) {
+                    document.getElementById('tempbar-gpu').style.backgroundColor = 'red'
+                }
+                if (currentPage == 'cooling') { setTimeout(() => { updateGPUTemp(); }, 1000) }
+
+            } else {
+                document.getElementById('temp-gpu').textContent = 'GPU Unsupported'
+                document.getElementById('temp-gpu').style.fontSize = '1rem'
+                document.getElementById('temp-gpu').style.margin = '6px 0 6px 0'
+            }
+
+
+        })
+}
+
 
 document.getElementById('loader').style.display = 'none';

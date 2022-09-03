@@ -29,8 +29,9 @@
     <div class="dot-pulse" id="dot-pulse"></div>
   </div>
   <div class="container" id="container">
+    <!-- HEADER/TOOLBAR -->
     <div class="header drag">
-      <h1 class="header-title" id="header-title">Centrl by Trygve v1.0.3</p>
+      <h1 class="header-title" id="header-title">Centrl by Trygve v1.0.5</p>
       </h1>
       <div class="header-icons nodrag">
         <div class="icons-header disableFunc" id="settings">
@@ -45,6 +46,7 @@
       </div>
     </div>
     <div class="content">
+      <!-- NAVBAR -->
       <div class="content-navbar">
         <div class="clickable navitem navbar-home nodrag" id="home">
           <i class="fa-solid fa-lg fa-house-user nodrag"></i>
@@ -67,11 +69,8 @@
           </div>
         </div>
       </div>
-
-
-
       <div class="content-content">
-
+        <!-- HOME -->
         <div class="content-home category" id="home-category">
 
           <div class="home-home">
@@ -93,7 +92,7 @@
           </div>
 
         </div>
-
+        <!-- SPECS -->
         <div class="content-specs category" id="specs-category">
           <div class="specs-header-container">
             <div class="specs-header">
@@ -312,7 +311,7 @@
 
 
         </div>
-
+        <!-- USAGE -->
         <div class="content-usage category" id="usage-category">
           <h2>USAGE</h2>
           <p id="tab-info">Here you can see all your system usage, in real time!</p>
@@ -399,15 +398,38 @@
           </div>
 
         </div>
-
+        <!-- COOLING -->
         <div class="content-cooling category" id="cooling-category">
+          <h2>COOLING</h2>
+          <p id="tab-info">If all goes to plan, you will be able to se relevant information about cooling! <br>
+            Still under heavy development.</p>
           <div class="cooling-cooling">
-            <h2>COOLING</h2>
-            <p id="tab-info">If all goes to plan, you will be able to se relevant information about cooling! <br>
-              Still under heavy development.</p>
+
+            <!-- CPU -->
+            <div class="usage-item temp-item" id="item-cpu">
+              <i class="fa-solid fa-temperature-three-quarters fa-xl item-"></i>
+              <h3 class="item-title temp-item-title">CPU</h3>
+              <p class="item-usage item-temp" id="temp-cpu">
+              <div class="apiloader" id="apiloader-tempcpu"><span></span></div>
+              </p>
+              <div class="item-usagebar item-tempbar" id="item-tempbar">
+                <div class="useagebar-usage" id="tempbar-cpu"></div>
+              </div>
+            </div>
+            <!-- GPU -->
+            <div class="usage-item temp-item" id="item-gpu">
+              <i class="fa-solid fa-temperature-three-quarters fa-xl item-"></i>
+              <h3 class="item-title temp-item-title">GPU</h3>
+              <p class="item-usage item-temp" id="temp-gpu">
+              <div class="apiloader" id="apiloader-tempgpu"><span></span></div>
+              </p>
+              <div class="item-usagebar item-tempbar" id="item-tempbar">
+                <div class="useagebar-usage" id="tempbar-gpu"></div>
+              </div>
+            </div>
           </div>
         </div>
-
+        <!-- POWER -->
         <div class="content-power category" id="power-category">
           <div class="power-power">
             <h2>POWER</h2>
@@ -415,7 +437,7 @@
               Still under heavy development.</p>
           </div>
         </div>
-
+        <!-- PROCESSES -->
         <div class="content-processes category" id="processes-category">
           <div class="processes-processes">
             <h2>PROCESSES</h2>

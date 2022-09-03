@@ -121,6 +121,14 @@
     opacity: 0;
   }
 }
+@keyframes switchPage {
+  100% {
+    opacity: 1;
+  }
+  0% {
+    opacity: 0;
+  }
+}
 
 /* ELEMENTS RENDER TOP -> BOTTOM */
 .container {
@@ -174,6 +182,15 @@
   flex-direction: row;
   overflow: hidden;
   margin-top: 10px;
+}
+
+.content-home,
+.content-specs,
+.content-usage,
+.content-cooling,
+.content-power,
+.content-processes {
+  animation: switchPage 0.25s linear;
 }
 
 .content-navbar {
@@ -364,7 +381,9 @@
 }
 
 /* Usage */
-
+.content-usage {
+  animation: switchPage 0.25s linear;
+}
 .usage-usage {
   display: flex;
   flex-direction: row;
@@ -497,6 +516,34 @@
   font-size: 1rem;
   font-weight: bold;
   overflow: hidden;
+}
+
+/* Cooling */
+.cooling-cooling {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: space-around;
+  width: 100%;
+  height: 440px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.temp-item {
+  width: 280px;
+  height: 280px;
+}
+.temp-item-title {
+  font-size: 1.5rem;
+}
+.item-temp {
+  font-size: 3rem;
+  margin: 10px;
+}
+.item-tempbar {
+  margin-top: 10px;
+  width: 150px;
+  height: 10px;
 }
 
 /* Loader */
