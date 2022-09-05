@@ -333,17 +333,25 @@ function updateGra() {
     si.graphics()
         .then(data => {
             document.getElementById('apiloader-usegpu').style.display = "none";
-            var gpuUsage = data.controllers[0].memoryUsed / data.controllers[0].memoryTotal * 100
-            document.getElementById('usage-gpu').textContent = gpuUsage.toFixed(0) + '%'
-            document.getElementById('useagebar-gpu').style.width = gpuUsage.toFixed(0) + '%'
-            if (gpuUsage.toFixed(0) <= 60) {
-                document.getElementById('useagebar-gpu').style.backgroundColor = 'yellowgreen'
-            } else if (gpuUsage.toFixed(0) > 60 && gpuUsage.toFixed(0) <= 80) {
-                document.getElementById('useagebar-gpu').style.backgroundColor = 'yellow'
-            } else if (gpuUsage.toFixed(0) > 80) {
-                document.getElementById('useagebar-gpu').style.backgroundColor = 'red'
+            if (data.controllers[0].memoryUsed != undefined) {
+                var gpuUsage = data.controllers[0].memoryUsed / data.controllers[0].memoryTotal * 100
+                document.getElementById('usage-gpu').textContent = gpuUsage.toFixed(0) + '%'
+                document.getElementById('useagebar-gpu').style.width = gpuUsage.toFixed(0) + '%'
+                if (gpuUsage.toFixed(0) <= 60) {
+                    document.getElementById('useagebar-gpu').style.backgroundColor = 'yellowgreen'
+                } else if (gpuUsage.toFixed(0) > 60 && gpuUsage.toFixed(0) <= 80) {
+                    document.getElementById('useagebar-gpu').style.backgroundColor = 'yellow'
+                } else if (gpuUsage.toFixed(0) > 80) {
+                    document.getElementById('useagebar-gpu').style.backgroundColor = 'red'
+                }
+                if (currentPage == 'usage') { setTimeout(() => { updateGra(); }, 1000) }
+            } else {
+                document.getElementById('usage-gpu').textContent = 'Unsupported'
+                document.getElementById('usage-gpu').style.color = 'gray'
+                document.getElementById('usage-gpu').style.fontSize = '1rem'
+                document.getElementById('item-usagebar-gpu').style.display = 'none'
             }
-            if (currentPage == 'usage') { setTimeout(() => { updateGra(); }, 1000) }
+
 
         })
 
@@ -522,7 +530,7 @@ function updateGPUTemp() {
                 } else if (gpuTemp > 80) {
                     document.getElementById('tempbar-gpu').style.backgroundColor = 'red'
                 }
-                if (currentPage == 'cooling') { setTimeout(() => { updateGPUTemp(); }, 1000) }
+                if (currentPage == 'cooling') { setTimeout(() => { updateGPUTemp(); }, 2000) }
 
             } else {
                 document.getElementById('temp-gpu').textContent = 'GPU Unsupported'

@@ -121,5 +121,5 @@ app.on('ready', function () {
     autoUpdater.checkForUpdates();
     // UNCOMMENT IF NPM START IS USED
     // win.close();
-    // createWindow()
+    // createWindow();
 });
