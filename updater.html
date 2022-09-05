@@ -23,14 +23,14 @@
             document.getElementById('message').innerText = text;
         })
 
-        var button = document.getElementById('button');
-        ipcRenderer.on('button', function () {
-            button.style.display = 'flex';
-            document.getElementById('dot-pulse').style.display = 'none';
-        })
-        button.addEventListener('click', () => {
-            ipcRenderer.send('update');
-        })
+        // var button = document.getElementById('button');
+        // ipcRenderer.on('button', function () {
+        //     button.style.display = 'flex';
+        //     document.getElementById('dot-pulse').style.display = 'none';
+        // })
+        // button.addEventListener('click', () => {
+        //     ipcRenderer.send('update');
+        // })
     </script>
 
     <style>

@@ -111,11 +111,12 @@ autoUpdater.on('download-progress', (progressObj) => {
 })
 autoUpdater.on('update-downloaded', (info) => {
     sendStatusToWindow('Update downloaded');
-    win.webContents.send('button');
-});
-ipc.on('update', () => {
+    // win.webContents.send('button');
     autoUpdater.quitAndInstall(false, true);
-})
+});
+// ipc.on('update', () => {
+//     autoUpdater.quitAndInstall(false, true);
+// })
 app.on('ready', function () {
     createDefaultWindow();
     autoUpdater.checkForUpdates();
