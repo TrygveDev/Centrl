@@ -31,7 +31,7 @@
   <div class="container" id="container">
     <!-- HEADER/TOOLBAR -->
     <div class="header drag">
-      <h1 class="header-title" id="header-title">Centrl by Trygve v1.0.6</p>
+      <h1 class="header-title" id="header-title">Centrl by Trygve v1.0.7</p>
       </h1>
       <div class="header-icons nodrag">
         <div class="icons-header disableFunc" id="settings">
@@ -255,28 +255,30 @@
                 <div class="details-gpu item-details-container" id="details-gpu">
                   <div class="apiloader details-apiloader" id="apiloader-details-gpu"><span></span></div>
                   <div class="details-data-loading" id="details-data-loading-gpu">
-                    <h3 class="details-header">GPU</h3>
+                    <h3 class="details-header list-header">GPU</h3>
+                    <template id="details-gpu-template">
+                      <h4 id="gpu-number"></h4>
+                      <p class="details-title list-indent">Model</p>
+                      <p class="selectable list-indent" id="gpu-model"></p>
 
-                    <p class="details-title">Model</p>
-                    <p class="selectable" id="gpu-model"></p>
+                      <p class="details-title list-indent">Vendor</p>
+                      <p class="selectable list-indent" id="gpu-vendor"></p>
 
-                    <p class="details-title">Vendor</p>
-                    <p class="selectable" id="gpu-vendor"></p>
+                      <p class="details-title list-indent">Clock Core</p>
+                      <p class="selectable list-indent" id="gpu-clockcore"></p>
 
-                    <p class="details-title">Clock Core</p>
-                    <p class="selectable" id="gpu-clockcore"></p>
+                      <p class="details-title list-indent">Clock Memory</p>
+                      <p class="selectable list-indent" id="gpu-clockmemory"></p>
 
-                    <p class="details-title">Clock Memory</p>
-                    <p class="selectable" id="gpu-clockmemory"></p>
+                      <p class="details-title list-indent">VRAM</p>
+                      <p class="selectable list-indent" id="gpu-vram"></p>
 
-                    <p class="details-title">VRAM</p>
-                    <p class="selectable" id="gpu-vram"></p>
+                      <p class="details-title list-indent">Bus</p>
+                      <p class="selectable list-indent" id="gpu-bus"></p>
 
-                    <p class="details-title">Bus</p>
-                    <p class="selectable" id="gpu-bus"></p>
-
-                    <p class="details-title">Driver Version</p>
-                    <p class="selectable" id="gpu-driver"></p>
+                      <p class="details-title list-indent">Driver Version</p>
+                      <p class="selectable list-bottom-seperator list-indent" id="gpu-driver"></p>
+                    </template>
                   </div>
 
 
@@ -412,7 +414,7 @@
               <p class="item-usage item-temp" id="temp-cpu">
               <div class="apiloader" id="apiloader-tempcpu"><span></span></div>
               </p>
-              <div class="item-usagebar item-tempbar" id="item-tempbar">
+              <div class="item-usagebar item-tempbar" id="item-tempbarcpu">
                 <div class="useagebar-usage" id="tempbar-cpu"></div>
               </div>
             </div>
@@ -423,7 +425,7 @@
               <p class="item-usage item-temp" id="temp-gpu">
               <div class="apiloader" id="apiloader-tempgpu"><span></span></div>
               </p>
-              <div class="item-usagebar item-tempbar" id="item-tempbar">
+              <div class="item-usagebar item-tempbar" id="item-tempbargpu">
                 <div class="useagebar-usage" id="tempbar-gpu"></div>
               </div>
             </div>

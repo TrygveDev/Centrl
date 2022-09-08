@@ -232,20 +232,45 @@ si.memLayout()
 
 si.graphics()
     .then(data => {
+        console.log(data)
         document.getElementById('apiloader-gpu').style.display = "none";
         document.getElementById('apiloader-details-gpu').style.display = "none";
         document.getElementById('details-data-loading-gpu').style.display = "block";
-        document.getElementById('specs-gpu').textContent = data.controllers[0].model
+        data.controllers.forEach((item) => {
+            var gpu = document.createElement('p')
+            gpu.id = item.model
+            document.getElementById('specs-gpu').appendChild(gpu)
+            document.getElementById(item.model).textContent = item.model
 
-        var data = data.controllers[0]
-        document.getElementById('gpu-model').textContent = data.model
-        document.getElementById('gpu-vendor').textContent = data.vendor
-        document.getElementById('gpu-clockcore').textContent = data.clockCore + " MHz"
-        document.getElementById('gpu-clockmemory').textContent = data.clockMemory + " MHz"
-        document.getElementById('gpu-vram').textContent = data.vram + " MB"
-        document.getElementById('gpu-bus').textContent = data.bus
-        document.getElementById('gpu-driver').textContent = data.driverVersion
+            var template = document.getElementById('details-gpu-template');
+            var clone = template.content.cloneNode(true);
+            clone.getElementById('gpu-number').textContent = "GPU " + (data.controllers.indexOf(item) + 1)
+            if (item.model != null || item.model != undefined) {
+                clone.getElementById('gpu-model').textContent = item.model
+            } else { clone.getElementById('gpu-model').textContent = '-' }
+            if (item.vendor != null || item.vendor != undefined) {
+                clone.getElementById('gpu-vendor').textContent = item.vendor
+            } else { clone.getElementById('gpu-vendor').textContent = '-' }
+            if (item.clockCore != null || item.clockCore != undefined) {
+                clone.getElementById('gpu-clockcore').textContent = item.clockCore + " MHz"
+            } else { clone.getElementById('gpu-clockcore').textContent = '-' }
+            if (item.clockMemory != null || item.clockMemory != undefined) {
+                clone.getElementById('gpu-clockmemory').textContent = item.clockMemory + " MHz"
+            } else { clone.getElementById('gpu-clockmemory').textContent = '-' }
+            if (item.vram != null || item.vram != undefined) {
+                clone.getElementById('gpu-vram').textContent = item.vram + " MB"
+            } else { clone.getElementById('gpu-vram').textContent = '-' }
+            if (item.bus != null || item.bus != undefined) {
+                clone.getElementById('gpu-bus').textContent = item.bus
+            } else { clone.getElementById('gpu-bus').textContent = '-' }
+            if (item.driverVersion != null || item.driverVersion != undefined) {
+                clone.getElementById('gpu-driver').textContent = item.driverVersion
+            } else { clone.getElementById('gpu-driver').textContent = '-' }
 
+
+
+            document.getElementById('details-gpu').appendChild(clone);
+        })
         gpuDiv.addEventListener('click', () => {
             document.querySelectorAll('.item-details-container').forEach(item => {
                 item.style.display = 'none'
@@ -508,7 +533,7 @@ function updateCPUTemp() {
                 document.getElementById('temp-cpu').textContent = 'Unsupported'
                 document.getElementById('temp-cpu').style.color = 'gray'
                 document.getElementById('temp-cpu').style.fontSize = '1.5rem'
-                document.getElementById('item-tempbar').style.display = 'none'
+                document.getElementById('item-tempbarcpu').style.display = 'none'
             }
 
 
@@ -536,6 +561,7 @@ function updateGPUTemp() {
                 document.getElementById('temp-gpu').textContent = 'GPU Unsupported'
                 document.getElementById('temp-gpu').style.fontSize = '1rem'
                 document.getElementById('temp-gpu').style.margin = '6px 0 6px 0'
+                document.getElementById('item-tempbargpu').style.display = 'none'
             }
 
 

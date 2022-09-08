@@ -366,7 +366,8 @@
   font-size: 0.8rem;
 }
 .details-storage,
-.details-ram {
+.details-ram,
+.details-gpu {
   overflow-x: hidden;
   overflow-y: scroll;
 }
