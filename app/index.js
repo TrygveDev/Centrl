@@ -232,7 +232,6 @@ si.memLayout()
 
 si.graphics()
     .then(data => {
-        console.log(data)
         document.getElementById('apiloader-gpu').style.display = "none";
         document.getElementById('apiloader-details-gpu').style.display = "none";
         document.getElementById('details-data-loading-gpu').style.display = "block";
