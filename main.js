@@ -85,7 +85,6 @@ function createDefaultWindow() {
             preload: path.join(__dirname, 'preload.js')
         }
     });
-    // win.webContents.openDevTools();
     win.on('closed', () => {
         win = null;
     });
@@ -111,21 +110,12 @@ autoUpdater.on('download-progress', (progressObj) => {
 })
 autoUpdater.on('update-downloaded', (info) => {
     sendStatusToWindow('Update downloaded');
-    // win.webContents.send('button');
     autoUpdater.quitAndInstall(false, true);
 });
-// ipc.on('update', () => {
-//     autoUpdater.quitAndInstall(false, true);
-// })
 app.on('ready', function () {
     createDefaultWindow();
     autoUpdater.checkForUpdates();
     // UNCOMMENT IF NPM START IS USED
-<<<<<<< Updated upstream
-    // win.close();
-    // createWindow();
-=======
     win.close();
     createWindow()
->>>>>>> Stashed changes
 });

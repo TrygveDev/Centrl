@@ -12,7 +12,7 @@ document.querySelectorAll('.category').forEach(item => {
 
 
 // STARTING PAGE
-var startPage = 'settings'
+var startPage = 'home'
 document.getElementById(startPage).style.backgroundColor = '#000000'
 document.getElementById(startPage + '-category').style.display = 'flex'
 
