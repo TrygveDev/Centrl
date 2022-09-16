@@ -121,6 +121,11 @@ app.on('ready', function () {
     createDefaultWindow();
     autoUpdater.checkForUpdates();
     // UNCOMMENT IF NPM START IS USED
+<<<<<<< Updated upstream
     // win.close();
     // createWindow();
+=======
+    win.close();
+    createWindow()
+>>>>>>> Stashed changes
 });

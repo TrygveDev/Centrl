@@ -184,6 +184,7 @@
   margin-top: 10px;
 }
 
+.content-settings,
 .content-home,
 .content-specs,
 .content-usage,
@@ -245,6 +246,39 @@
 }
 .navbar-item:hover {
   background-color: #000000;
+}
+
+/* SETTINGS */
+.settings-settings {
+  display: flex;
+  flex: row;
+  width: 100%;
+}
+.settings-menu {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 30%;
+  padding: 100px 0 0 0;
+  text-align: left;
+}
+.settings-menu-item {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  margin-top: 10px;
+  width: 70%;
+  height: 40px;
+  background-color: rgb(18, 21, 22);
+  border-radius: 12px;
+}
+.settings-menu-item:hover {
+  background-color: black;
+}
+
+.settings-data {
+  width: 70%;
+  padding: 70px 0 0 0;
 }
 
 /* HOME */

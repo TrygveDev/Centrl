@@ -12,7 +12,7 @@ document.querySelectorAll('.category').forEach(item => {
 
 
 // STARTING PAGE
-var startPage = 'home'
+var startPage = 'settings'
 document.getElementById(startPage).style.backgroundColor = '#000000'
 document.getElementById(startPage + '-category').style.display = 'flex'
 
@@ -24,7 +24,7 @@ document.getElementById('minimize').addEventListener('click', () => {
     ipc.send('minimizeApp')
 })
 document.getElementById('settings').addEventListener('click', () => {
-    popup("This feature is not yet implemented.", "orange")
+
 })
 
 // Functions
@@ -53,20 +53,23 @@ const home = document.getElementById('home')
 const cooling = document.getElementById('cooling')
 const power = document.getElementById('power')
 const processes = document.getElementById('processes')
+const settings = document.getElementById('settings')
 
 // Navbar
 document.querySelectorAll('.navitem').forEach(button => {
     button.addEventListener('click', () => {
         document.querySelectorAll('.navitem').forEach(item => {
-            item.style.backgroundColor = '#121516'
+            if (item.id != 'settings') item.style.backgroundColor = '#121516'
         })
-        button.style.backgroundColor = '#000000'
+        if (button.id != 'settings') button.style.backgroundColor = '#000000'
 
         document.querySelectorAll('.category').forEach(item => {
             item.style.display = 'none'
         })
     })
 })
+
+
 
 var currentPage = startPage;
 
@@ -118,7 +121,25 @@ processes.addEventListener('click', () => {
     }
 
 })
+settings.addEventListener('click', () => {
+    document.getElementById('settings-category').style.display = 'flex'
+    currentPage = 'settings';
+    document.querySelectorAll('.settings-menu-item').forEach(item => {
+        item.style.backgroundColor = "rgb(18, 21, 22)";
+    })
+    document.getElementById('menu-item-general').style.backgroundColor = "#000"
+})
 
+// Settings
+document.getElementById('menu-item-general').style.backgroundColor = "#000"
+document.querySelectorAll('.settings-menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+        document.querySelectorAll('.settings-menu-item').forEach(item => {
+            item.style.backgroundColor = "rgb(18, 21, 22)";
+        })
+        item.style.backgroundColor = "#000";
+    })
+})
 
 // Home
 document.getElementById('reportbug').addEventListener('click', (e) => {
