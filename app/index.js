@@ -2,8 +2,6 @@ const { ipcRenderer, app } = require('electron')
 const shell = require('electron').shell;
 const ipc = ipcRenderer
 const si = require('systeminformation');
-var osu = require('node-os-utils')
-var cpu = osu.cpu
 
 
 document.querySelectorAll('.category').forEach(item => {
@@ -354,10 +352,10 @@ function refreshSelectables() {
 refreshSelectables()
 
 function updateCPU() {
-    cpu.usage()
-        .then(data => {
+    si.currentLoad()
+        .then((data) => {
             document.getElementById('apiloader-usecpu').style.display = "none";
-            var cpuUsage = data.toFixed(0)
+            var cpuUsage = data.currentLoad.toFixed(0)
             document.getElementById('usage-cpu').textContent = cpuUsage + '%'
             document.getElementById('useagebar-cpu').style.width = cpuUsage + '%'
             if (cpuUsage <= 60) {
