@@ -366,7 +366,7 @@ function updateCPU() {
                 document.getElementById('useagebar-cpu').style.backgroundColor = 'red'
             }
             if (currentPage == 'usage') {
-                setTimeout(() => { updateCPU(); }, 1000)
+                setTimeout(() => { updateCPU(); }, 2000)
             }
         })
 }
@@ -387,7 +387,7 @@ function updateGra() {
                 } else if (gpuUsage.toFixed(0) > 80) {
                     document.getElementById('useagebar-gpu').style.backgroundColor = 'red'
                 }
-                if (currentPage == 'usage') { setTimeout(() => { updateGra(); }, 1000) }
+                if (currentPage == 'usage') { setTimeout(() => { updateGra(); }, 2000) }
             } else {
                 document.getElementById('usage-gpu').textContent = 'Unsupported'
                 document.getElementById('usage-gpu').style.color = 'gray'
@@ -417,7 +417,7 @@ function updateMem() {
             } else if (ramUsage.toFixed(0) > 80) {
                 document.getElementById('useagebar-ram').style.backgroundColor = 'red'
             }
-            if (currentPage == 'usage') { setTimeout(() => { updateMem(); }, 1000) }
+            if (currentPage == 'usage') { setTimeout(() => { updateMem(); }, 2000) }
 
         })
 
@@ -465,7 +465,7 @@ function updatePro() {
                 name.textContent = process.name
                 usage.textContent = process.mem.toFixed(1) + "%"
             })
-            if (currentPage == 'usage') { setTimeout(() => { updatePro(); }, 1000) }
+            if (currentPage == 'usage') { setTimeout(() => { updatePro(); }, 2000) }
 
         })
 }
@@ -477,7 +477,7 @@ function updateNet() {
             document.getElementById('apiloader-usenetdown').style.display = "none";
             document.getElementById('usage-netdown').textContent = Math.round(data[0].rx_sec / 1024)
             document.getElementById('usage-netup').textContent = Math.round(data[0].tx_sec / 1024)
-            if (currentPage == 'usage') { setTimeout(() => { updateNet(); }, 1000) }
+            if (currentPage == 'usage') { setTimeout(() => { updateNet(); }, 2000) }
 
         })
 
@@ -545,7 +545,7 @@ function updateCPUTemp() {
                 } else if (cpuTemp > 80) {
                     document.getElementById('tempbar-cpu').style.backgroundColor = 'red'
                 }
-                if (currentPage == 'cooling') { setTimeout(() => { updateCPUTemp(); }, 1000) }
+                if (currentPage == 'cooling') { setTimeout(() => { updateCPUTemp(); }, 2000) }
 
             } else {
                 document.getElementById('temp-cpu').textContent = 'Unsupported'
